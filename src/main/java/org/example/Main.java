@@ -7,7 +7,6 @@ import org.example.floristeria.stock.Decoracio;
 import org.example.floristeria.stock.Flors;
 import org.example.floristeria.stock.decoracio.Material;
 
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,22 +50,6 @@ public class Main {
         //Queda pendiente el añadirlo para después de la reunión
 
 
-//
-//        crearFloristeria();
-//        afegirArbre();
-//        afegirFlor();
-//        afegirDecoració();
-//        imprimeixStockPerPantalla();
-//        retirarArbre()
-//        Retirar flor
-//        Retirar decoració
-//        Printar per pantalla stock amb quantitats
-//        Printar per pantalla valor total de la floristeria
-//        Crear tickets de compra amb múltiples objectes
-//        Mostrar una llista de compres antigues
-//        Visualitzar el total de diners guanyats amb totes les vendes
-
-
         persistenciaTXT(floristeria02);
 
 
@@ -75,30 +58,43 @@ public class Main {
     private static void menuSwith(int input) {
         switch (input) {
             case 1:
+            	crearFloristeria();
                 break;
             case 2:
+            	afegirArbre();
                 break;
             case 3:
+            	afegirFlor();
                 break;
             case 4:
-                break;
+            	afegirDecoracio();
+            	break;
             case 5:
-                break;
+            	stock();
+            	break;
             case 6:
+            	retirarArbre();
                 break;
             case 7:
+            	retirarFlor();
                 break;
             case 8:
+            	retirarDecoracio();
                 break;
             case 9:
+            	stockQuantitats();
                 break;
             case 10:
+            	valorTotalFloristeria();
                 break;
             case 11:
+            	crearTicket();
                 break;
             case 12:
+            	compresAntigues();
                 break;
             case 13:
+            	totalVendes();
                 break;
             default:
                 System.out.println("T'has equiovocat!");
@@ -109,10 +105,15 @@ public class Main {
     private static int menuTxt() {
 
         return Entrada.leerInt("Que vols fer? \n \n"
-                + " o, Eixir \n" + " 1, Crear Floristeria \n" + " 2, Afegir Arbre \n"
-                + " 3, Afegir Flor \n" + " 4, Afegir Decoració \n"
+                + " 0, Sortir \n" 
+        		+ " 1, Crear Floristeria \n" 
+                + " 2, Afegir Arbre \n"
+                + " 3, Afegir Flor \n" 
+                + " 4, Afegir Decoració \n"
                 + " 5, Stock: Imprimeix per pantalla tots els arbres, flors i decoració que té la floristeria \n"
-                + " 6, Retirar arbre \n" + " 7, Retirar flor \n" + " 8, Retirar decoració \n "
+                + " 6, Retirar arbre \n" 
+                + " 7, Retirar flor \n" 
+                + " 8, Retirar decoració \n "
                 + " 9, Printar per pantalla stock amb quantitats \n"
                 + " 10, Printar per pantalla valor total de la floristeria \n"
                 + " 11, Crear tickets de compra amb múltiples objectes \n"
@@ -123,5 +124,57 @@ public class Main {
 
     public static void persistenciaTXT(Floristeria floristeria) {
 
+    }
+    
+    public static void crearFloristeria() {
+    	
+    }
+    
+    public static void afegirArbre() {
+    	
+    }
+    
+    public static void afegirFlor() {
+    	
+    }
+    
+    public static void afegirDecoracio() {
+    	
+    }
+    
+    public static void stock() {
+    	
+    }
+    
+    public static void retirarArbre() {
+    	
+    }
+    
+    public static void retirarFlor() {
+    	
+    }
+    
+    public static void retirarDecoracio() {
+    	
+    }
+    
+    public static void stockQuantitats() {
+    	
+    }
+    
+    public static void valorTotalFloristeria() {
+    	
+    }
+    
+    public static void crearTicket() {
+    	
+    }
+    
+    public static void compresAntigues() {
+    	
+    }
+    
+    public static void totalVendes() {
+    	
     }
 }

@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.utilities.*;
 import org.example.floristeria.Floristeria;
 import org.example.floristeria.stock.Arbre;
 import org.example.floristeria.stock.Decoracio;
@@ -9,25 +10,14 @@ import org.example.floristeria.stock.decoracio.Material;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+	public static void main(String[] args) {
+    	int input;
+    	do {
+    	input = menuTxt();
+    	menuSwith(input);
+    	}while(input != 0);
+       
 
-        System.out.println("Que vols fer?");
-        System.out.println(" ");
-        System.out.println("1, Crear Floristeria");
-        System.out.println("2, Afegir Arbre");
-        System.out.println("3, Afegir Flor");
-        System.out.println("4, Afegir Decoració");
-        System.out.println("5, Stock: Imprimeix per pantalla tots els arbres, flors i decoració que té la floristeria");
-        System.out.println("6, Retirar arbre");
-        System.out.println("7, Retirar flor");
-        System.out.println("8, Retirar decoració");
-        System.out.println("9, Printar per pantalla stock amb quantitats");
-        System.out.println("10, Printar per pantalla valor total de la floristeria");
-        System.out.println("11, Crear tickets de compra amb múltiples objectes");
-        System.out.println("12, Mostrar una llista de compres antigues");
-        System.out.println("13, Visualitzar el total de diners guanyats amb totes les vendes");
-
-        Scanner sc = new Scanner(System.in);
 
         //Ara empleno un parell de floristeries només per tenir coses amb les que treballar
 
@@ -63,25 +53,20 @@ public class Main {
 
 
 
-
-        crearFloristeria();
-        afegirArbre();
-        afegirFlor();
-        afegirDecoració();
-        imprimeixStockPerPantalla();
-        retirarArbre()
-        Retirar flor
-        Retirar decoració
-        Printar per pantalla stock amb quantitats
-        Printar per pantalla valor total de la floristeria
-        Crear tickets de compra amb múltiples objectes
-        Mostrar una llista de compres antigues
-        Visualitzar el total de diners guanyats amb totes les vendes
-
-
-
-
-
+//
+//        crearFloristeria();
+//        afegirArbre();
+//        afegirFlor();
+//        afegirDecoració();
+//        imprimeixStockPerPantalla();
+//        retirarArbre()
+//        Retirar flor
+//        Retirar decoració
+//        Printar per pantalla stock amb quantitats
+//        Printar per pantalla valor total de la floristeria
+//        Crear tickets de compra amb múltiples objectes
+//        Mostrar una llista de compres antigues
+//        Visualitzar el total de diners guanyats amb totes les vendes
 
 
 
@@ -94,9 +79,57 @@ public class Main {
 
     }
 
-    public static void persistenciaTXT(Floristeria floristeria){
+	private static void menuSwith(int input) {
+		switch(input) {
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			break;
+		case 8:
+			break;
+		case 9:
+			break;
+		case 10:
+			break;
+		case 11:
+			break;
+		case 12:
+			break;
+		case 13:
+			break;
+			default:
+				System.out.println("T'has equiovocat!");
+		}
+		
+	}
 
-    }
+	private static int menuTxt() {
 
+		return Entrada.leerInt("Que vols fer? \n \n"
+				+ " o, Eixir \n" + " 1, Crear Floristeria \n" + " 2, Afegir Arbre \n"
+				+ " 3, Afegir Flor \n" + " 4, Afegir Decoració \n"
+				+ " 5, Stock: Imprimeix per pantalla tots els arbres, flors i decoració que té la floristeria \n"
+				+ " 6, Retirar arbre \n" + " 7, Retirar flor \n" + " 8, Retirar decoració \n "
+				+ " 9, Printar per pantalla stock amb quantitats \n"
+				+ " 10, Printar per pantalla valor total de la floristeria \n"
+				+ " 11, Crear tickets de compra amb múltiples objectes \n"
+				+ " 12, Mostrar una llista de compres antigues \n"
+				+ " 13, Visualitzar el total de diners guanyats amb totes les vendes \n"
+				+ " -------------------------------------------------------------------------------------------------");
+	}
+
+	public static void persistenciaTXT(Floristeria floristeria) {
+
+	}
 
 }

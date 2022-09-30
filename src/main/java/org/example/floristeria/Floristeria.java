@@ -16,6 +16,9 @@ public class Floristeria {
 
     public Floristeria(String nom) {
         this.nom = nom;
+        this.conjuntArbres = new ArrayList<>();
+        this.conjuntFlors = new ArrayList<>();
+        this.conjuntDecoracio = new ArrayList<>();
     }
 
     public Double valorStockFloristeria(){
@@ -23,6 +26,10 @@ public class Floristeria {
                         + conjuntFlors.stream().mapToDouble(x -> x.getStock() * x.getPreuPerUnitat()).sum()
                         + conjuntDecoracio.stream().mapToDouble(x -> x.getStock() * x.getPreuPerUnitat()).sum();
         return valor;
+    }
+    
+    public String getNom() {
+    	return this.nom;
     }
 
     public ArrayList<Arbre> getConjuntArbres() {

@@ -103,7 +103,7 @@ public class Entrada {
 					System.out.println(mensaje);
 					input = sc.nextLine();
 				} catch (Exception e) {
-					System.out.println("Lo has escrito mal, vuelve a introducir un char");
+					System.out.println("Lo has escrito mal, vuelve a introducir un String");
 					error = e.toString();
 				}
 				
@@ -121,7 +121,7 @@ public class Entrada {
 					System.out.println(mensaje);
 					respuesta = sc.nextLine().toLowerCase().charAt(0);
 				} catch (Exception e) {
-					System.out.println("Lo has escrito mal, vuelve a introducir un char");
+					System.out.println("Lo has escrito mal, vuelve a introducir s o n");
 					error = e.toString();
 				}
 				if(respuesta == 's') {

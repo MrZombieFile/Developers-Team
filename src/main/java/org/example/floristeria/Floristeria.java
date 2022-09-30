@@ -9,7 +9,14 @@ import java.util.stream.Collectors;
 
 public class Floristeria {
 
-    private String nom;
+    @Override
+	public String toString() {
+		return "Floristeria=" + nom 
+				+ " \n , Arbres=" + conjuntArbres.toString() + " \n , Flors=" + conjuntFlors.toString()
+				+ " \n , conjuntDecoracio=" + conjuntDecoracio.toString() + " \n ";
+	}
+
+	private String nom;
     private ArrayList<Arbre> conjuntArbres;
     private ArrayList<Flors> conjuntFlors;
     private ArrayList<Decoracio> conjuntDecoracio;

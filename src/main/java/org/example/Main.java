@@ -1,6 +1,10 @@
 package org.example;
 
 import org.example.utilities.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.example.floristeria.Floristeria;
 import org.example.floristeria.stock.Arbre;
 import org.example.floristeria.stock.Decoracio;
@@ -9,49 +13,15 @@ import org.example.floristeria.stock.decoracio.Material;
 
 
 public class Main {
+	
+	private static List<Floristeria> floristerias = new ArrayList<>();
+	
     public static void main(String[] args) {
         int input;
         do {
             input = menuTxt();
             menuSwith(input);
         } while (input != 0);
-
-
-        //Ara empleno un parell de floristeries només per tenir coses amb les que treballar
-
-        Floristeria floristeria01 = new Floristeria("Floristeria01");
-        floristeria01.getConjuntArbres().add(new Arbre(1.42f, 22.50f, 5));
-        floristeria01.getConjuntArbres().add(new Arbre(2.23f, 49.50f, 12));
-        floristeria01.getConjuntArbres().add(new Arbre(4.5f, 73.00f, 7));
-
-        floristeria01.getConjuntFlors().add(new Flors("verd", 30f, 3));
-        floristeria01.getConjuntFlors().add(new Flors("marró", 50f, 5));
-        floristeria01.getConjuntFlors().add(new Flors("groc", 60f, 7));
-
-        floristeria01.getConjuntDecoracio().add(new Decoracio(Material.Fusta, 123f, 10));
-        floristeria01.getConjuntDecoracio().add(new Decoracio(Material.Plàstic, 234f, 13));
-        floristeria01.getConjuntDecoracio().add(new Decoracio(Material.Plàstic, 345f, 15));
-
-        //Aquí la segona floristeria:
-        Floristeria floristeria02 = new Floristeria("Floristeria02");
-        floristeria02.getConjuntArbres().add(new Arbre(1.42f, 22.50f, 5));
-        floristeria02.getConjuntArbres().add(new Arbre(2.23f, 49.50f, 12));
-        floristeria02.getConjuntArbres().add(new Arbre(4.5f, 73.00f, 7));
-
-        floristeria02.getConjuntFlors().add(new Flors("blau", 30f, 3));
-        floristeria02.getConjuntFlors().add(new Flors("vermell", 50f, 5));
-        floristeria02.getConjuntFlors().add(new Flors("groc", 60f, 7));
-
-        floristeria02.getConjuntDecoracio().add(new Decoracio(Material.Fusta, 123f, 10));
-        floristeria02.getConjuntDecoracio().add(new Decoracio(Material.Plàstic, 234f, 13));
-        floristeria02.getConjuntDecoracio().add(new Decoracio(Material.Plàstic, 345f, 15));
-
-        //Creo que hay debate entre si poner un arrayList de floristerias en el main o no
-        //Queda pendiente el añadirlo para después de la reunión
-
-
-        persistenciaTXT(floristeria02);
-
 
     }
 
@@ -96,6 +66,9 @@ public class Main {
             case 13:
             	totalVendes();
                 break;
+            case 0:
+            	System.out.println("Bye,bye.");
+            	break;
             default:
                 System.out.println("T'has equiovocat!");
         }
@@ -128,17 +101,116 @@ public class Main {
     
     public static void crearFloristeria() {
     	
+    	String nombre = Entrada.leerString("Indica un nom per a la floristeria :");
+    	
+    	Floristeria floristeria = new Floristeria(nombre);
+    	
+    	floristerias.add(floristeria);
+    	
+    	System.out.println("Floristeria creada correctament.");
+    	
     }
     
     public static void afegirArbre() {
     	
+    	int i = 0;
+    	boolean condicion = false;
+    	
+    	
+    	String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir l'arbre :");
+    	
+    	while(i<floristerias.size() && condicion == false) {
+    		
+    		if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
+    			
+    			float alcada = Entrada.leerFloat("Indica l'alçada de l'abre :");
+    			float preu = Entrada.leerFloat("Indica el preu de l'arbre :");
+    			int stock = Entrada.leerInt("Indica stock :");
+    			
+    			Arbre arbre = new Arbre(alcada,preu,stock);
+    			
+    			floristerias.get(i).getConjuntArbres().add(arbre);
+    			
+    			System.out.println("Arbre afegit correctament.");
+    			
+    			condicion = true;
+    			
+    		} else {
+    			i++;
+    		}
+    	}
     }
     
     public static void afegirFlor() {
     	
+    	int i = 0;
+    	boolean condicion = false;
+    	
+    	String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir la flor :");
+    	
+    	while (i<floristerias.size() && condicion == false) {
+    	
+    		if (nomFloristeria.equalsIgnoreCase(nomFloristeria)) {
+    			
+    			String color = Entrada.leerString("Indica el color de la flor :");
+    			float preu = Entrada.leerFloat("Indica el preu de la flor :");
+    			int stock = Entrada.leerInt("Indica stock :");
+    			
+    			Flors flor = new Flors(color, preu, stock);
+    			
+    			floristerias.get(i).getConjuntFlors().add(flor);
+    			
+    			System.out.println("Flor afegida correctament.");
+    			
+    			condicion = true;
+    		
+    		} else {
+    			i++;
+    		}	
+    	}
     }
     
     public static void afegirDecoracio() {
+    	
+    	int i = 0;
+    	boolean condicion = false;
+    	int opcion;
+    	Material material = null;
+    	
+    	String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir la decoració :");
+    	
+    	while (i<floristerias.size() && condicion == false) {
+    		if(nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
+    			do {
+    				
+    				opcion = Entrada.leerInt("Inidica el material de la decoració : "
+    						+ "1.Fusta\n"
+    						+ "2.Plàstic :");
+    			
+    				if(opcion == 1) {
+    					material = Material.Fusta;
+    				
+    				}else if (opcion == 2) {
+    					material = Material.Plàstic;
+    				}else {
+    					System.out.println("Opció incorrecta.");
+    				}
+    			}while(opcion !=1 && opcion !=2);
+    		
+    			float preu = Entrada.leerFloat("Indica el preu del material :");
+    			int stock = Entrada.leerInt("Indica stock :");
+    			
+    			Decoracio decoracio = new Decoracio(material, preu, stock);
+    			
+    			floristerias.get(i).getConjuntDecoracio().add(decoracio);
+    			
+    			System.out.println("Decoració afegida correctament.");
+    			
+    			condicion = true;
+    		}else {
+    			i++;
+    		}
+    	}
     	
     }
     

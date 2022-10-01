@@ -11,7 +11,6 @@ public class Arbre extends Producte {
         super(preu, stock);
         this.alcada = alcada;
         this.nom = nom;
-        this.stock = stock;
 
     }
 

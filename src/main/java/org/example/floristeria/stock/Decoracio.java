@@ -14,7 +14,6 @@ public class Decoracio extends Producte {
         super(preu, stock);
         this.material = material;
         this.nom= nom;
-        this.stock = stock;
 
     }
 

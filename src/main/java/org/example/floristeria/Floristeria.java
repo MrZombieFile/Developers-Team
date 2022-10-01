@@ -3,6 +3,7 @@ package org.example.floristeria;
 import org.example.floristeria.stock.Arbre;
 import org.example.floristeria.stock.Decoracio;
 import org.example.floristeria.stock.Flor;
+import org.example.floristeria.ticket.Ticket;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,8 @@ public class Floristeria {
     private ArrayList<Arbre> conjuntArbres;
     private ArrayList<Flor> conjuntFlors;
     private ArrayList<Decoracio> conjuntDecoracio;
+
+    private ArrayList<Ticket> historicDeTickets;
     
 
     public Floristeria(String nom) {
@@ -19,6 +22,7 @@ public class Floristeria {
         this.conjuntArbres = new ArrayList<>();
         this.conjuntFlors = new ArrayList<>();
         this.conjuntDecoracio = new ArrayList<>();
+        this.historicDeTickets = new ArrayList<>();
     }
 
     public Double valorStockFloristeria(){
@@ -67,7 +71,15 @@ public class Floristeria {
         this.conjuntDecoracio = conjuntDecoracio;
     }
 
-	@Override
+    public ArrayList<Ticket> getHistoricDeTickets() {
+        return historicDeTickets;
+    }
+
+    public void setHistoricDeTickets(ArrayList<Ticket> historicDeTickets) {
+        this.historicDeTickets = historicDeTickets;
+    }
+
+    @Override
 	public String toString() {
 		return "Floristeria=" + nom 
 				+ ", conjuntArbres=" + conjuntArbres.toString() 

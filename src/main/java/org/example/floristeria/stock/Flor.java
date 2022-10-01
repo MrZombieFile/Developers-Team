@@ -13,6 +13,5 @@ public class Flor extends Producte {
         super(preu, stock);
         this.color = color;
         this.nom= nom;
-        this.stock = stock;
     }
 }

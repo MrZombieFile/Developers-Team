@@ -28,13 +28,13 @@ public class Entrada {
 		int input = 0;
 		String error = null;
 		do {
-			error = null;			
+			//error = null;
 			try {
 				System.out.println(mensaje);
 				input = sc.nextInt();
 			} catch (InputMismatchException e) {
 				System.out.println("Te has equivocado de formato");
-				error = e.toString();
+				//error = e.toString();
 			}
 			sc.nextLine();
 		} while (error != null);

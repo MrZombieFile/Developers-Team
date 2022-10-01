@@ -1,9 +1,9 @@
 package org.example.floristeria.stock.producte;
 
-public class Producte {
-
-    private Float preuPerUnitat;
-    private int stock;
+public abstract class Producte {
+	protected String nom;
+	private Float preuPerUnitat;
+    protected int stock;
 
     public Producte(Float preu, int stock) {
         this.preuPerUnitat = preu;
@@ -25,7 +25,13 @@ public class Producte {
     public void setStock(int stock) {
         this.stock = stock;
     }
+    public String getNom() {
+  		return nom;
+  	}
 
+  	public void setNom(String nom) {
+  		this.nom = nom;
+  	}
 
 
 

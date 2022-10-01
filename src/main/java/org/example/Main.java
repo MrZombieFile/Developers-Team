@@ -10,6 +10,7 @@ import org.example.floristeria.stock.Arbre;
 import org.example.floristeria.stock.Decoracio;
 import org.example.floristeria.stock.Flors;
 import org.example.floristeria.stock.decoracio.Material;
+import org.example.floristeria.stock.producte.Producte;
 
 public class Main {
 
@@ -107,90 +108,114 @@ public class Main {
 	public static void afegirArbre() {
 		Floristeria floristeria = buscarFloristeria();
 		if (floristeria != null) {
+			String nom = Entrada.leerString("Indica el nom del arbre");
+			int posicion = buscarProducto(nom, floristeria);
+			if (posicion == -1) {
+				float alcada = Entrada.leerFloat("Indica l'alçada de l'abre :");
+				float preu = Entrada.leerFloat("Indica el preu de l'arbre :");
+				int stock = Entrada.leerInt("Indica stock :");
 
-			float alcada = Entrada.leerFloat("Indica l'alçada de l'abre :");
-			float preu = Entrada.leerFloat("Indica el preu de l'arbre :");
-			int stock = Entrada.leerInt("Indica stock :");
+				Arbre arbre1 = new Arbre(nom, alcada, preu, stock);
 
-			Arbre arbre = new Arbre(alcada, preu, stock);
+				floristeria.getConjuntArbres().add(arbre1);
 
-			floristeria.getConjuntArbres().add(arbre);
-
+			} else {
+				Arbre arbre = floristeria.getConjuntArbres().get(posicion);
+				arbre.setStock(arbre.getStock() + 1);
+			}
 			System.out.println("Arbre afegit correctament.");
 
 		} else {
-			System.out.println("La floristeria no existe");
+			System.out.println("La floristeria no existeix");
 		}
 
+	}
+
+	private static int buscarProducto(String nom, Floristeria floristeria) {
+		boolean encontrado = false;
+		int i = -1;
+
+		while (encontrado == false && i < floristerias.size()) {
+			i++;
+			if (floristeria.getConjuntArbres().get(i).getNom().equalsIgnoreCase(nom)) {
+				encontrado = true;
+			}
+		}
+		if (encontrado == false)
+			i = -1;
+		while (encontrado == false && i < floristerias.size()) {
+			i++;
+			if (floristeria.getConjuntDecoracio().get(i).getNom().equalsIgnoreCase(nom)) {
+				encontrado = true;
+			}
+		}
+		if (encontrado == false)
+			i = -1;
+		while (encontrado == false && i < floristerias.size()) {
+			i++;
+			if (floristeria.getConjuntFlors().get(i).getNom().equalsIgnoreCase(nom)) {
+				encontrado = true;
+			}
+		}
+		if (encontrado == false)
+			i = -1;
+		return i;
 	}
 
 	public static void afegirFlor() {
 
-		int i = 0;
-		boolean condicion = false;
+		Floristeria floristeria = buscarFloristeria();
+		if (floristeria != null) {
+			String nom = Entrada.leerString("Indica el nom");
+			String color = Entrada.leerString("Indica el color de la flor :");
+			float preu = Entrada.leerFloat("Indica el preu de la flor :");
+			int stock = Entrada.leerInt("Indica stock :");
 
-		String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir la flor :");
+			Flors flor = new Flors(nom, color, preu, stock);
 
-		while (i < floristerias.size() && condicion == false) {
+			floristeria.getConjuntFlors().add(flor);
 
-			if (nomFloristeria.equalsIgnoreCase(nomFloristeria)) {
+			System.out.println("Flor afegida correctament.");
 
-				String color = Entrada.leerString("Indica el color de la flor :");
-				float preu = Entrada.leerFloat("Indica el preu de la flor :");
-				int stock = Entrada.leerInt("Indica stock :");
-
-				Flors flor = new Flors(color, preu, stock);
-
-				floristerias.get(i).getConjuntFlors().add(flor);
-
-				System.out.println("Flor afegida correctament.");
-
-				condicion = true;
-
-			} else {
-				i++;
-			}
+		} else {
+			System.out.println("La floristeria no existeix");
 		}
+
 	}
 
 	public static void afegirDecoracio() {
 
-		int i = 0;
-		boolean condicion = false;
 		int opcion;
 		Material material = null;
 
-		String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir la decoració :");
+		Floristeria floristeria = buscarFloristeria();
+		if (floristeria != null) {
+			String nom = Entrada.leerString("Indica el nom de la decoracio");
 
-		while (i < floristerias.size() && condicion == false) {
-			if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
-				do {
+			do {
+				opcion = Entrada.leerInt("Inidica el material de la decoració : " + "1.Fusta\n" + "2.Plàstic :");
 
-					opcion = Entrada.leerInt("Inidica el material de la decoració : " + "1.Fusta\n" + "2.Plàstic :");
+				if (opcion == 1) {
+					material = Material.Fusta;
 
-					if (opcion == 1) {
-						material = Material.Fusta;
+				} else if (opcion == 2) {
+					material = Material.Plàstic;
+				} else {
+					System.out.println("Opció incorrecta.");
+				}
+			} while (opcion != 1 && opcion != 2);
 
-					} else if (opcion == 2) {
-						material = Material.Plàstic;
-					} else {
-						System.out.println("Opció incorrecta.");
-					}
-				} while (opcion != 1 && opcion != 2);
+			float preu = Entrada.leerFloat("Indica el preu del material :");
+			int stock = Entrada.leerInt("Indica stock :");
 
-				float preu = Entrada.leerFloat("Indica el preu del material :");
-				int stock = Entrada.leerInt("Indica stock :");
+			Decoracio decoracio = new Decoracio(nom, material, preu, stock);
 
-				Decoracio decoracio = new Decoracio(material, preu, stock);
+			floristeria.getConjuntDecoracio().add(decoracio);
 
-				floristerias.get(i).getConjuntDecoracio().add(decoracio);
+			System.out.println("Decoració afegida correctament.");
 
-				System.out.println("Decoració afegida correctament.");
-
-				condicion = true;
-			} else {
-				i++;
-			}
+		} else {
+			System.out.println("La floristeria no existe");
 		}
 
 	}
@@ -225,18 +250,74 @@ public class Main {
 
 	public static void retirarArbre() {
 		Floristeria floristeria = buscarFloristeria();
+		if (floristeria != null) {
+			String nom = Entrada.leerString("Indica el nom del arbre");
+			int posicion = buscarProducto(nom, floristeria);
+			if (posicion == -1) {
+				System.out.println("El arbol no existe");
+			} else {
+				Arbre arbre = floristeria.getConjuntArbres().get(posicion);
+				arbre.setStock(arbre.getStock() - 1);
+				if (arbre.getStock() == 0)
+					floristeria.getConjuntArbres().remove(arbre);
+			}
+			System.out.println("Arbre retirat correctament.");
+
+		} else {
+			System.out.println("La floristeria no existeix");
+		}
 
 	}
 
 	public static void retirarFlor() {
+		Floristeria floristeria = buscarFloristeria();
+		if (floristeria != null) {
+			String nom = Entrada.leerString("Indica el nom del arbre");
+			int posicion = buscarProducto(nom, floristeria);
+			if (posicion == -1) {
+				System.out.println("El arbol no existe");
+			} else {
+				Flors arbre = floristeria.getConjuntFlors().get(posicion);
+				arbre.setStock(arbre.getStock() - 1);
+				if (arbre.getStock() == 0)
+					floristeria.getConjuntFlors().remove(arbre);
+			}
+			System.out.println("Arbre retirat correctament.");
 
+		} else {
+			System.out.println("La floristeria no existeix");
+		}
 	}
 
 	public static void retirarDecoracio() {
+		Floristeria floristeria = buscarFloristeria();
+		if (floristeria != null) {
+			String nom = Entrada.leerString("Indica el nom del arbre");
+			int posicion = buscarProducto(nom, floristeria);
+			if (posicion == -1) {
+				System.out.println("El arbol no existe");
+			} else {
+				Decoracio arbre = floristeria.getConjuntDecoracio().get(posicion);
+				arbre.setStock(arbre.getStock() - 1);
+				if (arbre.getStock() == 0)
+					floristeria.getConjuntDecoracio().remove(arbre);
+			}
+			System.out.println("Arbre retirat correctament.");
 
+		} else {
+			System.out.println("La floristeria no existeix");
+		}
 	}
 
 	public static void stockQuantitats() {
+		Floristeria floristeria = buscarFloristeria();
+
+		if (floristeria == null) {
+			System.out.println("La floristeria no existe");
+		} else {
+			System.out.println("Stock de la floristeria: ");
+			floristeria.stockTotal();
+		}
 
 	}
 

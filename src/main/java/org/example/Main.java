@@ -61,10 +61,10 @@ public class Main {
 			crearTicket();
 			break;
 		case 12:
-			compresAntigues();
+			compresAntigues(Optional.empty());
 			break;
 		case 13:
-			totalVendes();
+			totalVendes(Optional.empty());
 			break;
 		case 0:
 			System.out.println("Bye,bye.");
@@ -431,21 +431,43 @@ public class Main {
 		return ticket;
 	}
 
-	public static Double compresAntigues(Optional<Floristeria> optional) {
+	public static void compresAntigues(Optional<Floristeria> optional) {
 		Floristeria floristeria;
 		if (optional.isEmpty()) {
 			floristeria = buscarFloristeria();
 		}else{
 			floristeria = optional.get();
 		}
-		Double montoCompresAntigues = floristeria.getHistoricDeTickets().stream().map(x -> x.getPreuTotalLlistaComprat()).mapToDouble(x -> x).sum();
-		System.out.println(montoCompresAntigues);
-		return montoCompresAntigues;
+		floristeria.getHistoricDeTickets().stream()
+				.map(x -> {
+					x.getLlistaComprat().stream().forEach(d -> {
+							System.out.println(d.getNom());
+							System.out.println(d.getPreuPerUnitat());
+							});
+					return x.getPreuTotalLlistaComprat();
+				}).mapToDouble(x -> x).sum();
+
 	}
 
-	public static void totalVendes() {
-		//total del venut a totes les floristeries
+	public static void totalVendes(Optional<Floristeria> optional) {
+		Floristeria floristeria;
+		if (optional.isEmpty()) {
+			floristeria = buscarFloristeria();
+		}else{
+			floristeria = optional.get();
+		}
+
+		//total del venut a la floristeria introduida
+		Double montoCompresAntigues = floristeria.getHistoricDeTickets().stream().map(x -> x.getPreuTotalLlistaComprat()).mapToDouble(x -> x).sum();
+		System.out.println("El total d'aquesta floristeria es :" + montoCompresAntigues);
+
+		/*
+
+		//total del venut a totes les floristeries, que m'he confos i ja que l'he fet
+		//el borrare mes tard per si un cas sigués necessari
 		Double totalDeTot = floristerias.stream().map(x -> compresAntigues(Optional.of(x))).mapToDouble(s -> s).sum();
-		System.out.println(totalDeTot);
+		System.out.println("El total de totes les floristeries és de :" + totalDeTot);
+
+		 */
 	}
 }

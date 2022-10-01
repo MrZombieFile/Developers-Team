@@ -21,4 +21,5 @@ public class Ticket {
         return llistaComprat.stream().mapToDouble(x -> x.getPreuPerUnitat()).sum();
     }
 
+
 }

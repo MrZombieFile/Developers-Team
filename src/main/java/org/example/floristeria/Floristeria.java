@@ -2,16 +2,15 @@ package org.example.floristeria;
 
 import org.example.floristeria.stock.Arbre;
 import org.example.floristeria.stock.Decoracio;
-import org.example.floristeria.stock.Flors;
+import org.example.floristeria.stock.Flor;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Floristeria {
 	private String nom;
 
     private ArrayList<Arbre> conjuntArbres;
-    private ArrayList<Flors> conjuntFlors;
+    private ArrayList<Flor> conjuntFlors;
     private ArrayList<Decoracio> conjuntDecoracio;
     
 
@@ -52,11 +51,11 @@ public class Floristeria {
         this.conjuntArbres = conjuntArbres;
     }
 
-    public ArrayList<Flors> getConjuntFlors() {
+    public ArrayList<Flor> getConjuntFlors() {
         return conjuntFlors;
     }
 
-    public void setConjuntFlors(ArrayList<Flors> conjuntFlors) {
+    public void setConjuntFlors(ArrayList<Flor> conjuntFlors) {
         this.conjuntFlors = conjuntFlors;
     }
 

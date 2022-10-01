@@ -8,6 +8,7 @@ public class Decoracio extends Producte {
 
 	private Material material;
     private Float preu;
+    private String nom;
     
     public Decoracio(String nom, Material material, Float preu, int stock) {
         super(preu, stock);
@@ -16,5 +17,7 @@ public class Decoracio extends Producte {
         this.stock = stock;
 
     }
+
+
     
 }

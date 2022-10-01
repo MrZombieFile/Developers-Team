@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.floristeria.ticket.Ticket;
 import org.example.utilities.*;
 
 import java.util.ArrayList;
@@ -8,9 +9,8 @@ import java.util.List;
 import org.example.floristeria.Floristeria;
 import org.example.floristeria.stock.Arbre;
 import org.example.floristeria.stock.Decoracio;
-import org.example.floristeria.stock.Flors;
+import org.example.floristeria.stock.Flor;
 import org.example.floristeria.stock.decoracio.Material;
-import org.example.floristeria.stock.producte.Producte;
 
 public class Main {
 
@@ -87,10 +87,6 @@ public class Main {
 				+ " 12, Mostrar una llista de compres antigues \n"
 				+ " 13, Visualitzar el total de diners guanyats amb totes les vendes \n"
 				+ " -------------------------------------------------------------------------------------------------");
-	}
-
-	public static void persistenciaTXT(Floristeria floristeria) {
-
 	}
 
 	public static void crearFloristeria() {
@@ -171,7 +167,7 @@ public class Main {
 			float preu = Entrada.leerFloat("Indica el preu de la flor :");
 			int stock = Entrada.leerInt("Indica stock :");
 
-			Flors flor = new Flors(nom, color, preu, stock);
+			Flor flor = new Flor(nom, color, preu, stock);
 
 			floristeria.getConjuntFlors().add(flor);
 
@@ -277,7 +273,7 @@ public class Main {
 			if (posicion == -1) {
 				System.out.println("El arbol no existe");
 			} else {
-				Flors arbre = floristeria.getConjuntFlors().get(posicion);
+				Flor arbre = floristeria.getConjuntFlors().get(posicion);
 				arbre.setStock(arbre.getStock() - 1);
 				if (arbre.getStock() == 0)
 					floristeria.getConjuntFlors().remove(arbre);
@@ -320,13 +316,71 @@ public class Main {
 		}
 
 	}
+	//#########################################################################
 
 	public static void valorTotalFloristeria() {
-
+		Floristeria floristeria = buscarFloristeria();
+		if (floristeria != null)
+			System.out.println(floristeria.valorStockFloristeria());
+		else
+			System.out.println("La floristeria no existeix");
 	}
 
 	public static void crearTicket() {
+		Floristeria floristeria = buscarFloristeria();
+		int i = Entrada.leerInt("Què vols comprar?" +
+				"\n 1, Arbres \n 2, Flors \n 3, Decoració");
+		Ticket ticket = new Ticket();
 
+		switch(i){
+			case 1:
+				floristeria.getConjuntArbres().forEach(x -> System.out.println(x.getNom()));
+				String nomArbre = Entrada.leerString("Quin arbre vols comprar?");
+				//Tant per aquest com per als altres cases dins del switch,
+				// ara busco el producte que s'ha comprat i l'elimino del sistema:
+				int posicionArbol = buscarProducto(nomArbre, floristeria);
+				if (posicionArbol == -1) {
+					System.out.println("El arbol no existeix");
+				} else {
+					Arbre arbre = floristeria.getConjuntArbres().get(posicionArbol);
+					arbre.setStock(arbre.getStock() - 1);
+					if (arbre.getStock() == 0)
+						floristeria.getConjuntArbres().remove(arbre);
+				}
+				//fins aqui, on l'enregistro al tiquet que haura de sortir per la caixa
+				if (ticket.getLlistaComprat() == null){
+					ticket.setLlistaComprat(ticket.getLlistaComprat().add(new Arbre(nomArbre, )));
+				}
+				break;
+			case 2:
+				floristeria.getConjuntFlors().forEach(x -> System.out.println(x.getNom()));
+				String nomFlor = Entrada.leerString("Quina flor vols comprar?");
+
+				int posicionFlor = buscarProducto(nomFlor, floristeria);
+				if (posicionFlor == -1) {
+					System.out.println("La flor no existeix");
+				} else {
+					Flor flor = floristeria.getConjuntFlors().get(posicionFlor);
+					flor.setStock(flor.getStock() - 1);
+					if (flor.getStock() == 0)
+						floristeria.getConjuntArbres().remove(flor);
+				}
+				break;
+			case 3:
+				floristeria.getConjuntDecoracio().forEach(x -> System.out.println(x.getNom()));
+				String nomDecoracio = Entrada.leerString("Quina flor vols comprar?");
+
+				int posicionDecoracio = buscarProducto(nomDecoracio, floristeria);
+				if (posicionDecoracio == -1) {
+					System.out.println("La decoració no existeix");
+				} else {
+					Decoracio decoracio = floristeria.getConjuntDecoracio().get(posicionDecoracio);
+					decoracio.setStock(decoracio.getStock() - 1);
+					if (decoracio.getStock() == 0)
+						floristeria.getConjuntArbres().remove(decoracio);
+				}
+				break;
+		}
 	}
 
 	public static void compresAntigues() {

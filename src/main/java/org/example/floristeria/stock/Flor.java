@@ -6,12 +6,14 @@ public class Flor extends Producte {
 	
 
 	private String color;
-    private Float preu;
-    private String nom;
+  
 
     public Flor(String nom, String color, Float preu, int stock) {
-        super(preu, stock);
+        super(nom,preu,stock);
         this.color = color;
-        this.nom= nom;
+    }
+    
+    public String getColor() {
+    	return this.color;
     }
 }

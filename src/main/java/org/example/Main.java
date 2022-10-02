@@ -95,9 +95,10 @@ public class Main {
 		int i = 0;
 
 
-		while (encontrado == false && i < floristeria.getConjuntArbres().size()) {
-			Arbre arbre = floristeria.getConjuntArbres().get(i);
-			if (arbre.getNom().equalsIgnoreCase(nom)) {
+
+
+		while (i < floristeria.getConjuntArbres().size() && encontrado == false) {
+			if (floristeria.getConjuntArbres().get(i).getNom().equalsIgnoreCase(nom)) {
 				encontrado = true;
 			}else {
 				i++;
@@ -125,7 +126,7 @@ public class Main {
 		}
 
 		if (encontrado == false)
-			i = -1;
+			i = 0;
 		return i;
 	}
 
@@ -279,8 +280,8 @@ public class Main {
 		Floristeria floristeria;
 		if (optional.isEmpty()) {
 			floristeria = buscarFloristeria();
-		}else{
-			floristeria = optional.get().get(0);
+		}else {
+			floristeria = optional.get().entrySet().iterator().next().getValue();
 		}
 
 		if (floristeria != null) {
@@ -288,8 +289,7 @@ public class Main {
 			if (optional.isEmpty())
 				nom = Entrada.leerString("Indica el nom del arbre");
 			else
-				nom = optional.get().keySet().iterator().next();
-
+				nom = optional.get().entrySet().iterator().next().getKey();
 			int posicion = buscarProducto(nom, floristeria);
 			if (posicion == -1) {
 				System.out.println("El arbol no existe");
@@ -298,8 +298,8 @@ public class Main {
 				arbre.setStock(arbre.getStock() - 1);
 				if (arbre.getStock() == 0)
 					floristeria.getConjuntArbres().remove(arbre);
+				System.out.println("Arbre retirat correctament.");
 			}
-			System.out.println("Arbre retirat correctament.");
 
 		} else {
 			System.out.println("La floristeria no existeix");
@@ -312,7 +312,7 @@ public class Main {
 		if (optional.isEmpty()) {
 			floristeria = buscarFloristeria();
 		}else{
-			floristeria = optional.get().get(0);
+			floristeria = optional.get().entrySet().iterator().next().getValue();
 		}
 
 		if (floristeria != null) {
@@ -320,18 +320,18 @@ public class Main {
 			if (optional.isEmpty())
 				nom = Entrada.leerString("Indica el nom de la flor");
 			else
-				nom = optional.get().keySet().iterator().next();
+				nom = optional.get().entrySet().iterator().next().getKey();
 
 			int posicion = buscarProducto(nom, floristeria);
 			if (posicion == -1) {
 				System.out.println("La flor no existe");
 			} else {
-				Flor arbre = floristeria.getConjuntFlors().get(posicion);
-				arbre.setStock(arbre.getStock() - 1);
-				if (arbre.getStock() == 0)
-					floristeria.getConjuntFlors().remove(arbre);
+				Flor flor = floristeria.getConjuntFlors().get(posicion);
+				flor.setStock(flor.getStock() - 1);
+				if (flor.getStock() == 0)
+					floristeria.getConjuntFlors().remove(flor);
 			}
-			System.out.println("Arbre retirat correctament.");
+			System.out.println("Flor retirada correctament.");
 
 		} else {
 			System.out.println("La floristeria no existeix");
@@ -343,7 +343,7 @@ public class Main {
 		if (optional.isEmpty()) {
 			floristeria = buscarFloristeria();
 		}else{
-			floristeria = optional.get().get(0);
+			floristeria = optional.get().entrySet().iterator().next().getValue();
 		}
 
 		if (floristeria != null) {
@@ -351,19 +351,19 @@ public class Main {
 			if (optional.isEmpty())
 				nom = Entrada.leerString("Indica el nom de la decoracio");
 			else
-				nom = optional.get().keySet().iterator().next();
+				nom = optional.get().entrySet().iterator().next().getKey();
 
 
 			int posicion = buscarProducto(nom, floristeria);
 			if (posicion == -1) {
 				System.out.println("La decoración no existe");
 			} else {
-				Decoracio arbre = floristeria.getConjuntDecoracio().get(posicion);
-				arbre.setStock(arbre.getStock() - 1);
-				if (arbre.getStock() == 0)
-					floristeria.getConjuntDecoracio().remove(arbre);
+				Decoracio deco = floristeria.getConjuntDecoracio().get(posicion);
+				deco.setStock(deco.getStock() - 1);
+				if (deco.getStock() == 0)
+					floristeria.getConjuntDecoracio().remove(deco);
 			}
-			System.out.println("Arbre retirat correctament.");
+			System.out.println("Flor retirada correctament.");
 
 		} else {
 			System.out.println("La floristeria no existeix");
@@ -381,7 +381,6 @@ public class Main {
 		}
 
 	}
-	//#########################################################################
 
 	public static void valorTotalFloristeria() {
 		Floristeria floristeria = buscarFloristeria();
@@ -394,11 +393,10 @@ public class Main {
 	public static Ticket crearTicket() {
 		Floristeria floristeria = buscarFloristeria();
 		int i;
-		Ticket ticket;
+		Ticket ticket = new Ticket();
 		do {
 			i = Entrada.leerInt("Què vols comprar?" +
 					"\n 1, Arbres \n 2, Flors \n 3, Decoració \n 4, Ja ho he comprat tot");
-			ticket = new Ticket();
 
 			switch (i) {
 				case 1:
@@ -406,12 +404,20 @@ public class Main {
 					String nomArbre = Entrada.leerString("Quin arbre vols comprar?");
 					Map<String, Floristeria> mapArbre = new HashMap<>();
 					mapArbre.put(nomArbre, floristeria);
+
 					retirarArbre(Optional.of(mapArbre));
 
-					Arbre a = floristeria.getConjuntArbres().get(buscarProducto(nomArbre, floristeria));
+					int q = buscarProducto(nomArbre, floristeria);
+					Arbre a = floristeria.getConjuntArbres().get(q);
 
-					//fins aqui, on l'enregistro al tiquet que haura de sortir per la caixa
-					ArrayList<Producte> producteArrayListArbre = ticket.getLlistaComprat();
+					// aqui l'enregistro al tiquet que haura de sortir per la caixa
+					ArrayList<Producte> producteArrayListArbre;
+					if (ticket.getLlistaComprat() == null){
+						producteArrayListArbre = new ArrayList<Producte>();
+					}else {
+						producteArrayListArbre = ticket.getLlistaComprat();
+					}
+
 					producteArrayListArbre.add(a);
 					ticket.setLlistaComprat(producteArrayListArbre);
 
@@ -421,12 +427,20 @@ public class Main {
 					String nomFlor = Entrada.leerString("Quina flor vols comprar?");
 					Map<String, Floristeria> mapFlor = new HashMap<>();
 					mapFlor.put(nomFlor, floristeria);
-					retirarArbre(Optional.of(mapFlor));
 
-					Flor f = floristeria.getConjuntFlors().get(buscarProducto(nomFlor, floristeria));
+					retirarFlor(Optional.of(mapFlor));
 
+					int w = buscarProducto(nomFlor, floristeria);
+					Flor f = floristeria.getConjuntFlors().get(w);
 
-					ArrayList<Producte> producteArrayListFlor = ticket.getLlistaComprat();
+					// aqui l'enregistro al tiquet que haura de sortir per la caixa
+					ArrayList<Producte> producteArrayListFlor;
+					if (ticket.getLlistaComprat() == null){
+						producteArrayListFlor = new ArrayList<Producte>();
+					}else {
+						producteArrayListFlor = ticket.getLlistaComprat();
+					}
+
 					producteArrayListFlor.add(f);
 					ticket.setLlistaComprat(producteArrayListFlor);
 					break;
@@ -435,12 +449,20 @@ public class Main {
 					String nomDecoracio = Entrada.leerString("Quina decoracio vols comprar?");
 					Map<String, Floristeria> mapDecoracio = new HashMap<>();
 					mapDecoracio.put(nomDecoracio, floristeria);
-					retirarArbre(Optional.of(mapDecoracio));
 
-					Decoracio d = floristeria.getConjuntDecoracio().get(buscarProducto(nomDecoracio, floristeria));
+					retirarFlor(Optional.of(mapDecoracio));
 
+					int e = buscarProducto(nomDecoracio, floristeria);
+					Decoracio d = floristeria.getConjuntDecoracio().get(e);
 
-					ArrayList<Producte> producteArrayListDecoracio = ticket.getLlistaComprat();
+					// aqui l'enregistro al tiquet que haura de sortir per la caixa
+					ArrayList<Producte> producteArrayListDecoracio;
+					if (ticket.getLlistaComprat() == null){
+						producteArrayListDecoracio = new ArrayList<Producte>();
+					}else {
+						producteArrayListDecoracio = ticket.getLlistaComprat();
+					}
+
 					producteArrayListDecoracio.add(d);
 					ticket.setLlistaComprat(producteArrayListDecoracio);
 					break;
@@ -461,9 +483,10 @@ public class Main {
 		}
 		floristeria.getHistoricDeTickets().stream()
 				.map(x -> {
+					System.out.println("Ticket: ");
 					x.getLlistaComprat().stream().forEach(d -> {
-							System.out.println(d.getNom());
-							System.out.println(d.getPreuPerUnitat());
+							System.out.println("Nom: " + d.getNom());
+							System.out.println("Preu per unitat " + d.getPreuPerUnitat());
 							});
 					return x.getPreuTotalLlistaComprat();
 				}).mapToDouble(x -> x).sum();

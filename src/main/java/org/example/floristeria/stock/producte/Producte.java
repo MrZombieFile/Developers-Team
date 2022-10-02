@@ -5,8 +5,9 @@ public abstract class Producte {
 	private Float preuPerUnitat;
     protected int stock;
 
-    public Producte(Float preu, int stock) {
-        this.preuPerUnitat = preu;
+    public Producte(String nom, Float preu, int stock) {
+        this.nom = nom;
+    	this.preuPerUnitat = preu;
         this.stock = stock;
     }
 
@@ -32,7 +33,5 @@ public abstract class Producte {
   	public void setNom(String nom) {
   		this.nom = nom;
   	}
-
-
 
 }

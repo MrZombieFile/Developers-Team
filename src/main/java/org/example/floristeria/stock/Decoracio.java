@@ -7,16 +7,16 @@ public class Decoracio extends Producte {
 	
 
 	private Material material;
-    private Float preu;
-    private String nom;
+    
     
     public Decoracio(String nom, Material material, Float preu, int stock) {
-        super(preu, stock);
+        super(nom,preu,stock);
         this.material = material;
-        this.nom= nom;
 
     }
 
-
+    public Material getMaterial() {
+    	return this.material;
+    }
     
 }

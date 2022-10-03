@@ -162,170 +162,90 @@ public class Main {
 
 	}
 
-<<<<<<< HEAD
-	    	Floristeria floristeria = buscarFloristeria();
-
-	    		if (floristeria != null) {
-=======
 	public static void afegirArbre() {
 
-		int i = 0;
-		boolean condicion = false;
+    	Floristeria floristeria = buscarFloristeria();
 
-		String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir l'arbre :");
+    		if (floristeria != null) {
 
-		while (i < floristerias.size() && condicion == false) {
+    			String nom = Entrada.leerString("Indica el nom de l'arbre :");
+    			float alcada = Entrada.leerFloat("Indica l'alçada de l'abre :");
+    			float preu = Entrada.leerFloat("Indica el preu de l'arbre :");
+    			int stock = Entrada.leerInt("Indica stock :");
 
-			if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
->>>>>>> b0df04ffeae7a1c61ab9a20d69fe562aa71a52ba
+    			Arbre arbre = new Arbre(nom,alcada,preu,stock);
 
-				String nom = Entrada.leerString("Indica el nom de l'arbre :");
-				float alcada = Entrada.leerFloat("Indica l'alçada de l'abre :");
-				float preu = Entrada.leerFloat("Indica el preu de l'arbre :");
-				int stock = Entrada.leerInt("Indica stock :");
+    			floristeria.getConjuntArbres().add(arbre);
 
-				Arbre arbre = new Arbre(nom, alcada, preu, stock);
+    			System.out.println("Arbre afegit correctament.");
+    		
+    		} else {
+    			System.out.println("La floristeria no existeix.");
+    		}
+    	}
+    
 
-<<<<<<< HEAD
-	    			floristeria.getConjuntArbres().add(arbre);
+    public static void afegirFlor() {
 
-	    			System.out.println("Arbre afegit correctament.");
-	    		
-	    		} else {
-	    			System.out.println("La floristeria no existeix.");
-	    		}
-	    	}
-	    
-=======
-				floristerias.get(i).getConjuntArbres().add(arbre);
+    	Floristeria floristeria = buscarFloristeria();
 
-				System.out.println("Arbre afegit correctament.");
+    		if (floristeria != null) {
 
-				condicion = true;
+    			String nom = Entrada.leerString("Indica el nom de la flor :");
+    			String color = Entrada.leerString("Indica el color de la flor :");
+    			float preu = Entrada.leerFloat("Indica el preu de la flor :");
+    			int stock = Entrada.leerInt("Indica stock :");
 
-			} else {
-				i++;
-			}
-		}
-	}
->>>>>>> b0df04ffeae7a1c61ab9a20d69fe562aa71a52ba
+    			Flor flor = new Flor(nom,color, preu, stock);
 
-	public static void afegirFlor() {
+    			floristeria.getConjuntFlors().add(flor);
 
-<<<<<<< HEAD
-	    	Floristeria floristeria = buscarFloristeria();
+    			System.out.println("Flor afegida correctament.");
 
-	    		if (floristeria != null) {
-=======
-		int i = 0;
-		boolean condicion = false;
 
-		String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir la flor :");
+    		} else {
+    			System.out.println("La floristeria no existeix.");
+    		}	
+    	}
 
-		while (i < floristerias.size() && condicion == false) {
+    public static void afegirDecoracio() {
 
-			if (nomFloristeria.equalsIgnoreCase(nomFloristeria)) {
->>>>>>> b0df04ffeae7a1c61ab9a20d69fe562aa71a52ba
+    	Floristeria floristeria = buscarFloristeria();
+    	int opcion;
+    	Material material = null;
 
-				String nom = Entrada.leerString("Indica el nom de la flor :");
-				String color = Entrada.leerString("Indica el color de la flor :");
-				float preu = Entrada.leerFloat("Indica el preu de la flor :");
-				int stock = Entrada.leerInt("Indica stock :");
+    		if(floristeria != null) {
+    			do {
 
-				Flor flor = new Flor(nom, color, preu, stock);
+    				opcion = Entrada.leerInt("Inidica el material de la decoració :\n "
+    						+ "1.Fusta\n"
+    						+ "2.Plàstic :");
 
-<<<<<<< HEAD
-	    			floristeria.getConjuntFlors().add(flor);
-=======
-				floristerias.get(i).getConjuntFlors().add(flor);
->>>>>>> b0df04ffeae7a1c61ab9a20d69fe562aa71a52ba
+    				if(opcion == 1) {
+    					material = Material.Fusta;
 
-				System.out.println("Flor afegida correctament.");
+    				}else if (opcion == 2) {
+    					material = Material.Plàstic;
+    				}else {
+    					System.out.println("Opció incorrecta.");
+    				}
+    			}while(opcion !=1 && opcion !=2);
+    			
+    			String nom = Entrada.leerString("Indica el nom de la decoració :");
+    			float preu = Entrada.leerFloat("Indica el preu del material :");
+    			int stock = Entrada.leerInt("Indica stock :");
 
-<<<<<<< HEAD
+    			Decoracio decoracio = new Decoracio(nom,material, preu, stock);
 
-	    		} else {
-	    			System.out.println("La floristeria no existeix.");
-	    		}	
-	    	}
-=======
-				condicion = true;
+    			floristeria.getConjuntDecoracio().add(decoracio);
 
-			} else {
-				i++;
-			}
-		}
-	}
->>>>>>> b0df04ffeae7a1c61ab9a20d69fe562aa71a52ba
+    			System.out.println("Decoració afegida correctament.");
 
-	public static void afegirDecoracio() {
+    		}else {
+    			System.out.println("La floristeria no existeix.");
+    		}
+    	}
 
-<<<<<<< HEAD
-	    	Floristeria floristeria = buscarFloristeria();
-	    	int opcion;
-	    	Material material = null;
-
-	    		if(floristeria != null) {
-	    			do {
-
-	    				opcion = Entrada.leerInt("Inidica el material de la decoració :\n "
-	    						+ "1.Fusta\n"
-	    						+ "2.Plàstic :");
-=======
-		int i = 0;
-		boolean condicion = false;
-		int opcion;
-		Material material = null;
-
-		String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir la decoració :");
-
-		while (i < floristerias.size() && condicion == false) {
-			if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
-				do {
-
-					opcion = Entrada.leerInt("Inidica el material de la decoració : " + "1.Fusta\n" + "2.Plàstic :");
->>>>>>> b0df04ffeae7a1c61ab9a20d69fe562aa71a52ba
-
-					if (opcion == 1) {
-						material = Material.Fusta;
-
-					} else if (opcion == 2) {
-						material = Material.Plàstic;
-					} else {
-						System.out.println("Opció incorrecta.");
-					}
-				} while (opcion != 1 && opcion != 2);
-
-				String nom = Entrada.leerString("Indica el nom de la decoració :");
-				float preu = Entrada.leerFloat("Indica el preu del material :");
-				int stock = Entrada.leerInt("Indica stock :");
-
-<<<<<<< HEAD
-	    			floristeria.getConjuntDecoracio().add(decoracio);
-=======
-				Decoracio decoracio = new Decoracio(nom, material, preu, stock);
->>>>>>> b0df04ffeae7a1c61ab9a20d69fe562aa71a52ba
-
-				floristerias.get(i).getConjuntDecoracio().add(decoracio);
-
-<<<<<<< HEAD
-	    		}else {
-	    			System.out.println("La floristeria no existeix.");
-	    		}
-	    	}
-
-=======
-				System.out.println("Decoració afegida correctament.");
-
-				condicion = true;
-			} else {
-				i++;
-			}
-		}
-
-	}
-
->>>>>>> b0df04ffeae7a1c61ab9a20d69fe562aa71a52ba
 	public static void stock() {
 		Floristeria floristeria = buscarFloristeria();
 

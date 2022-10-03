@@ -14,4 +14,9 @@ public class Arbre extends Producte {
         return this.alcada;
     }
 
+	@Override
+	public void eliminado() {
+		System.out.println("El "+ nom+ " ha sigut eliminat");
+	}
+
 }

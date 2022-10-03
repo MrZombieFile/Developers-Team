@@ -16,4 +16,8 @@ public class Flor extends Producte {
     public String getColor() {
     	return this.color;
     }
+    @Override
+	public void eliminado() {
+		System.out.println("El "+ nom+ " ha sigut eliminat");
+	}
 }

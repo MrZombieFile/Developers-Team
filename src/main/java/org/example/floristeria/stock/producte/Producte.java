@@ -33,5 +33,6 @@ public abstract class Producte {
   	public void setNom(String nom) {
   		this.nom = nom;
   	}
-
+  	
+public abstract void eliminado();
 }

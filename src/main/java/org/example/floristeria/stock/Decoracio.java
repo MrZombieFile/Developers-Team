@@ -18,5 +18,9 @@ public class Decoracio extends Producte {
     public Material getMaterial() {
     	return this.material;
     }
+    @Override
+	public void eliminado() {
+		System.out.println("El "+ nom+ " ha sigut eliminat");
+	}
     
 }

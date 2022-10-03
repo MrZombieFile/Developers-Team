@@ -335,6 +335,91 @@ public class Main {
 
 	}
 
+	public static void retirar1Arbre(Optional<Map<String, Floristeria>> optional) {
+		Floristeria floristeria;
+		if (optional.isEmpty()) {
+			floristeria = buscarFloristeria();
+		}else {
+			floristeria = optional.get().entrySet().iterator().next().getValue();
+		}
+
+		if (floristeria != null) {
+			String nom;
+			if (optional.isEmpty())
+				nom = Entrada.leerString("Indica el nom del arbre");
+			else
+				nom = optional.get().entrySet().iterator().next().getKey();
+
+			Arbre arbre = (Arbre) buscarProducto(nom, floristeria);
+			arbre.setStock(arbre.getStock() - 1);
+			//si és l'ultima unitat en stock retiro aquell tipus de arbre:
+			if (arbre.getStock() == 0)
+				floristeria.getConjuntArbres().remove(arbre);
+			System.out.println("Arbre retirat correctament.");
+
+
+		} else {
+			System.out.println("La floristeria no existeix");
+		}
+
+	}
+
+	public static void retirar1Flor(Optional<Map<String, Floristeria>> optional) {
+		Floristeria floristeria;
+		if (optional.isEmpty()) {
+			floristeria = buscarFloristeria();
+		}else{
+			floristeria = optional.get().entrySet().iterator().next().getValue();
+		}
+
+		if (floristeria != null) {
+			String nom;
+			if (optional.isEmpty())
+				nom = Entrada.leerString("Indica el nom de la flor");
+			else
+				nom = optional.get().entrySet().iterator().next().getKey();
+
+			Flor flor = (Flor) buscarProducto(nom, floristeria);
+			flor.setStock(flor.getStock() - 1);
+			//idem
+			if (flor.getStock() == 0)
+				floristeria.getConjuntFlors().remove(flor);
+
+			System.out.println("Flor retirada correctament.");
+
+		} else {
+			System.out.println("La floristeria no existeix");
+		}
+	}
+
+	public static void retirar1Decoracio(Optional<Map<String, Floristeria>> optional) {
+		Floristeria floristeria;
+		if (optional.isEmpty()) {
+			floristeria = buscarFloristeria();
+		}else{
+			floristeria = optional.get().entrySet().iterator().next().getValue();
+		}
+
+		if (floristeria != null) {
+			String nom;
+			if (optional.isEmpty())
+				nom = Entrada.leerString("Indica el nom de la decoracio");
+			else
+				nom = optional.get().entrySet().iterator().next().getKey();
+
+
+			Decoracio deco = (Decoracio) buscarProducto(nom, floristeria);
+			deco.setStock(deco.getStock() - 1);
+			if (deco.getStock() == 0)
+				floristeria.getConjuntDecoracio().remove(deco);
+
+			System.out.println("Flor retirada correctament.");
+
+		} else {
+			System.out.println("La floristeria no existeix");
+		}
+	}
+
 	public static void valorTotalFloristeria() {
 		Floristeria floristeria = buscarFloristeria();
 		if (floristeria != null)
@@ -358,7 +443,7 @@ public class Main {
 				Map<String, Floristeria> mapArbre = new HashMap<>();
 				mapArbre.put(nomArbre, floristeria);
 
-				//retirarFlor(); ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
+				retirar1Arbre(Optional.of(mapArbre)); //ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
 
 				Arbre a = (Arbre) buscarProducto(nomArbre, floristeria);
 
@@ -380,7 +465,7 @@ public class Main {
 				Map<String, Floristeria> mapFlor = new HashMap<>();
 				mapFlor.put(nomFlor, floristeria);
 
-				//retirarFlor(); ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
+				retirar1Flor(Optional.of(mapFlor)); //ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
 
 				Flor f = (Flor) buscarProducto(nomFlor, floristeria);
 
@@ -401,7 +486,7 @@ public class Main {
 				Map<String, Floristeria> mapDecoracio = new HashMap<>();
 				mapDecoracio.put(nomDecoracio, floristeria);
 
-				//retirarFlor(); ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
+				retirar1Decoracio(Optional.of(mapDecoracio)); //ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
 
 				Decoracio e = (Decoracio) buscarProducto(nomDecoracio, floristeria);
 				 
@@ -456,14 +541,5 @@ public class Main {
 				.map(x -> x.getPreuTotalLlistaComprat()).mapToDouble(x -> x).sum();
 		System.out.println("El total d'aquesta floristeria es :" + montoCompresAntigues);
 
-		/*
-		 * 
-		 * //total del venut a totes les floristeries, que m'he confos i ja que l'he fet
-		 * //el borrare mes tard per si un cas sigués necessari Double totalDeTot =
-		 * floristerias.stream().map(x -> compresAntigues(Optional.of(x))).mapToDouble(s
-		 * -> s).sum(); System.out.println("El total de totes les floristeries és de :"
-		 * + totalDeTot);
-		 * 
-		 */
 	}
 }

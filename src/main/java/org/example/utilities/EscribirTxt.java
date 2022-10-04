@@ -7,35 +7,12 @@ public class EscribirTxt {
 	private static FileWriter fichero = null;
 	private static PrintWriter pw = null;
 
-	public static void crearTxt() {
-		int i=0;
-		// creo el escritor y fichero
-		try {
-			fichero = new FileWriter("floristerias.txt");
-			pw = new PrintWriter(fichero);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			i++;
-			try {
-				
-				fichero = new FileWriter("floristerias"+i+".txt");
-				pw = new PrintWriter(fichero);
-
-			} catch (Exception e1) {
-				e1.printStackTrace();
-				
-			}
-		}
-
-	}
-
 	public static void escribirTxt(String texto) {
 		FileWriter fichero = null;
 		PrintWriter pw = null;
 		// creo el escritor y fichero
 		try {
-			fichero = new FileWriter("floristerias.txt");
+			fichero = new FileWriter("floristerias.txt",true);
 			pw = new PrintWriter(fichero);
 
 			pw.println(texto);

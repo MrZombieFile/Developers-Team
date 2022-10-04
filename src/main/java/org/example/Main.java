@@ -18,7 +18,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		int input;
-		EscribirTxt.crearTxt();
 		do {
 			input = menuTxt();
 			menuSwith(input);
@@ -316,13 +315,14 @@ public class Main {
 		Floristeria floristeria = buscarFloristeria();		
 
 		if (floristeria != null) {
-			
 			String nom = Entrada.leerString("Indica el nom del arbre");
 			Producte producto = buscarProducto(nom, floristeria);
 
 			if (producto == null){
 				System.out.println("No tens aquest arbre");
 			}else {
+				EscribirTxt.escribirTxt("  Retirant arbre a floristeria "+floristeria.getNom());
+				EscribirTxt.escribirTxt("    Nom arbre : "+nom);
 				producto.eliminado();
 				floristeria.getConjuntArbres().remove(producto);
 			}
@@ -337,13 +337,14 @@ public class Main {
 		Floristeria floristeria = buscarFloristeria();		
 
 		if (floristeria != null) {
-			
 			String nom = Entrada.leerString("Indica el nom del arbre");
 			Producte producto = buscarProducto(nom, floristeria);
 
 			if (producto == null){
 				System.out.println("No tens aquesta flor");
 			}else {
+				EscribirTxt.escribirTxt("  Retirant flor a floristeria "+floristeria.getNom());
+				EscribirTxt.escribirTxt("    Nom flor : "+nom);
 				producto.eliminado();
 				floristeria.getConjuntFlors().remove(producto);
 			}
@@ -364,6 +365,8 @@ public class Main {
 			if (producto == null){
 				System.out.println("No tens aquesta Decoracio");
 			}else {
+				EscribirTxt.escribirTxt("  Retirant decoració a floristeria "+floristeria.getNom());
+				EscribirTxt.escribirTxt("    Nom decoració : "+nom);
 				producto.eliminado();
 				floristeria.getConjuntDecoracio().remove(producto);
 			}
@@ -388,16 +391,19 @@ public class Main {
 
 	public static void valorTotalFloristeria() {
 		Floristeria floristeria = buscarFloristeria();
-		if (floristeria != null)
+		if (floristeria != null) {
 			System.out.println(floristeria.valorStockFloristeria());
-		else
+		}else {
 			System.out.println("La floristeria no existeix");
+		}
 	}
 
 	public static Ticket crearTicket() {
 		Floristeria floristeria = buscarFloristeria();
+
 		int i;
 		Ticket ticket = new Ticket();
+		EscribirTxt.escribirTxt("  Creant ticket a floristeria : "+floristeria.getNom());
 		do {
 			i = Entrada.leerInt(
 					"Què vols comprar?" + "\n 1, Arbres \n 2, Flors \n 3, Decoració \n 4, Ja ho he comprat tot");
@@ -405,7 +411,9 @@ public class Main {
 			switch (i) {
 			case 1:
 				floristeria.getConjuntArbres().forEach(x -> System.out.println(x.getNom()));
+				EscribirTxt.escribirTxt("  Comprant arbre :");
 				String nomArbre = Entrada.leerString("Quin arbre vols comprar?");
+				EscribirTxt.escribirTxt("  "+nomArbre);
 				Map<String, Floristeria> mapArbre = new HashMap<>();
 				mapArbre.put(nomArbre, floristeria);
 
@@ -427,7 +435,9 @@ public class Main {
 				break;
 			case 2:
 				floristeria.getConjuntFlors().forEach(x -> System.out.println(x.getNom()));
+				EscribirTxt.escribirTxt("  Comprant flor:");
 				String nomFlor = Entrada.leerString("Quina flor vols comprar?");
+				EscribirTxt.escribirTxt("  "+nomFlor);
 				Map<String, Floristeria> mapFlor = new HashMap<>();
 				mapFlor.put(nomFlor, floristeria);
 
@@ -448,7 +458,9 @@ public class Main {
 				break;
 			case 3:
 				floristeria.getConjuntDecoracio().forEach(x -> System.out.println(x.getNom()));
+				EscribirTxt.escribirTxt("  Comprant decoració:");
 				String nomDecoracio = Entrada.leerString("Quina decoracio vols comprar?");
+				EscribirTxt.escribirTxt("  "+nomDecoracio);
 				Map<String, Floristeria> mapDecoracio = new HashMap<>();
 				mapDecoracio.put(nomDecoracio, floristeria);
 

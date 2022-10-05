@@ -12,6 +12,9 @@ import org.example.floristeria.stock.Decoracio;
 import org.example.floristeria.stock.Flor;
 import org.example.floristeria.stock.decoracio.Material;
 
+import static org.example.utilities.EscribirTxt.escribirFloristeriaTxt;
+import static org.example.utilities.EscribirTxt.escribirTxt;
+
 public class Main {
 
 	private static ArrayList<Floristeria> floristerias = new ArrayList<>();
@@ -67,6 +70,7 @@ public class Main {
 			totalVendes(Optional.empty());
 			break;
 		case 0:
+			escribirEnFloristeriaTXT(floristerias);
 			EscribirTxt.cerrarTxt();
 			System.out.println("Fins aviat!");
 			break;
@@ -155,9 +159,9 @@ public class Main {
 	}
 
 	public static void crearFloristeria() {
-		EscribirTxt.escribirTxt("  Floristeria creada:");
+		escribirTxt("  Floristeria creada:");
 		String nombre = Entrada.leerString("Indica un nom per a la floristeria :");
-		EscribirTxt.escribirTxt("    "+nombre);
+		escribirTxt("    "+nombre);
 
 		Floristeria floristeria = new Floristeria(nombre);
 
@@ -177,19 +181,19 @@ public class Main {
 		while (i < floristerias.size() && condicion == false) {
 
 			if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
-				EscribirTxt.escribirTxt("  Afegint arbre a "+ nomFloristeria);
+				escribirTxt("  Afegint arbre a "+ nomFloristeria);
 
 				String nom = Entrada.leerString("Indica el nom de l'arbre :");
-				EscribirTxt.escribirTxt("    Nom: "+nom);
+				escribirTxt("    Nom: "+nom);
 
 				float alcada = Entrada.leerFloat("Indica l'alçada de l'abre :");
-				EscribirTxt.escribirTxt("    alcada: "+alcada);
+				escribirTxt("    alcada: "+alcada);
 
 				float preu = Entrada.leerFloat("Indica el preu de l'arbre :");
-				EscribirTxt.escribirTxt("    preu: "+preu);
+				escribirTxt("    preu: "+preu);
 
 				int stock = Entrada.leerInt("Indica stock :");
-				EscribirTxt.escribirTxt("    stock: "+stock);
+				escribirTxt("    stock: "+stock);
 
 				Arbre arbre = new Arbre(nom, alcada, preu, stock);
 
@@ -215,18 +219,18 @@ public class Main {
 		while (i < floristerias.size() && condicion == false) {
 
 			if (nomFloristeria.equalsIgnoreCase(nomFloristeria)) {
-				EscribirTxt.escribirTxt("  Afegint flor a "+ nomFloristeria);
+				escribirTxt("  Afegint flor a "+ nomFloristeria);
 
 				String nom = Entrada.leerString("Indica el nom de la flor :");
-				EscribirTxt.escribirTxt("    nom"+nom);
+				escribirTxt("    nom"+nom);
 				String color = Entrada.leerString("Indica el color de la flor :");
-				EscribirTxt.escribirTxt("    color"+color);
+				escribirTxt("    color"+color);
 
 				float preu = Entrada.leerFloat("Indica el preu de la flor :");
-				EscribirTxt.escribirTxt("    preu"+preu);
+				escribirTxt("    preu"+preu);
 
 				int stock = Entrada.leerInt("Indica stock :");
-				EscribirTxt.escribirTxt("    stock"+stock);
+				escribirTxt("    stock"+stock);
 
 				Flor flor = new Flor(nom, color, preu, stock);
 
@@ -253,7 +257,7 @@ public class Main {
 
 		while (i < floristerias.size() && condicion == false) {
 			if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
-				EscribirTxt.escribirTxt("  Afegint deciracio a "+ nomFloristeria);
+				escribirTxt("  Afegint decoracio a "+ nomFloristeria);
 
 				do {
 
@@ -261,11 +265,11 @@ public class Main {
 
 					if (opcion == 1) {
 						material = Material.Fusta;
-						EscribirTxt.escribirTxt("    material: "+ material.toString());
+						escribirTxt("    material: "+ material.toString());
 
 					} else if (opcion == 2) {
 						material = Material.Plàstic;
-						EscribirTxt.escribirTxt("    material: "+ material.toString());
+						escribirTxt("    material: "+ material.toString());
 
 					} else {
 						System.out.println("Opció incorrecta.");
@@ -273,13 +277,13 @@ public class Main {
 				} while (opcion != 1 && opcion != 2);
 
 				String nom = Entrada.leerString("Indica el nom de la decoració :");
-				EscribirTxt.escribirTxt("    nom: "+ nom);
+				escribirTxt("    nom: "+ nom);
 
 				float preu = Entrada.leerFloat("Indica el preu del material :");
-				EscribirTxt.escribirTxt("    preu: "+ preu);
+				escribirTxt("    preu: "+ preu);
 
 				int stock = Entrada.leerInt("Indica stock :");
-				EscribirTxt.escribirTxt("    stock: "+ stock);
+				escribirTxt("    stock: "+ stock);
 
 
 				Decoracio decoracio = new Decoracio(nom, material, preu, stock);
@@ -315,14 +319,14 @@ public class Main {
 		Floristeria floristeria = buscarFloristeria();		
 
 		if (floristeria != null) {
-			String nom = Entrada.leerString("Indica el nom del arbre");
+			String nom = Entrada.leerString("Indica el nom de l'arbre");
 			Producte producto = buscarProducto(nom, floristeria);
 
 			if (producto == null){
 				System.out.println("No tens aquest arbre");
 			}else {
-				EscribirTxt.escribirTxt("  Retirant arbre a floristeria "+floristeria.getNom());
-				EscribirTxt.escribirTxt("    Nom arbre : "+nom);
+				escribirTxt("  Retirant arbre a floristeria "+floristeria.getNom());
+				escribirTxt("    Nom arbre : "+nom);
 				producto.eliminado();
 				floristeria.getConjuntArbres().remove(producto);
 			}
@@ -343,8 +347,8 @@ public class Main {
 			if (producto == null){
 				System.out.println("No tens aquesta flor");
 			}else {
-				EscribirTxt.escribirTxt("  Retirant flor a floristeria "+floristeria.getNom());
-				EscribirTxt.escribirTxt("    Nom flor : "+nom);
+				escribirTxt("  Retirant flor a floristeria "+floristeria.getNom());
+				escribirTxt("    Nom flor : "+nom);
 				producto.eliminado();
 				floristeria.getConjuntFlors().remove(producto);
 			}
@@ -365,8 +369,8 @@ public class Main {
 			if (producto == null){
 				System.out.println("No tens aquesta Decoracio");
 			}else {
-				EscribirTxt.escribirTxt("  Retirant decoració a floristeria "+floristeria.getNom());
-				EscribirTxt.escribirTxt("    Nom decoració : "+nom);
+				escribirTxt("  Retirant decoració a floristeria "+floristeria.getNom());
+				escribirTxt("    Nom decoració : "+nom);
 				producto.eliminado();
 				floristeria.getConjuntDecoracio().remove(producto);
 			}
@@ -403,7 +407,7 @@ public class Main {
 
 		int i;
 		Ticket ticket = new Ticket();
-		EscribirTxt.escribirTxt("  Creant ticket a floristeria : "+floristeria.getNom());
+		escribirTxt("  Creant ticket a floristeria : "+floristeria.getNom());
 		do {
 			i = Entrada.leerInt(
 					"Què vols comprar?" + "\n 1, Arbres \n 2, Flors \n 3, Decoració \n 4, Ja ho he comprat tot");
@@ -411,9 +415,9 @@ public class Main {
 			switch (i) {
 			case 1:
 				floristeria.getConjuntArbres().forEach(x -> System.out.println(x.getNom()));
-				EscribirTxt.escribirTxt("  Comprant arbre :");
+				escribirTxt("  Comprant arbre :");
 				String nomArbre = Entrada.leerString("Quin arbre vols comprar?");
-				EscribirTxt.escribirTxt("  "+nomArbre);
+				escribirTxt("  "+nomArbre);
 				Map<String, Floristeria> mapArbre = new HashMap<>();
 				mapArbre.put(nomArbre, floristeria);
 
@@ -435,9 +439,9 @@ public class Main {
 				break;
 			case 2:
 				floristeria.getConjuntFlors().forEach(x -> System.out.println(x.getNom()));
-				EscribirTxt.escribirTxt("  Comprant flor:");
+				escribirTxt("  Comprant flor:");
 				String nomFlor = Entrada.leerString("Quina flor vols comprar?");
-				EscribirTxt.escribirTxt("  "+nomFlor);
+				escribirTxt("  "+nomFlor);
 				Map<String, Floristeria> mapFlor = new HashMap<>();
 				mapFlor.put(nomFlor, floristeria);
 
@@ -458,9 +462,9 @@ public class Main {
 				break;
 			case 3:
 				floristeria.getConjuntDecoracio().forEach(x -> System.out.println(x.getNom()));
-				EscribirTxt.escribirTxt("  Comprant decoració:");
+				escribirTxt("  Comprant decoració:");
 				String nomDecoracio = Entrada.leerString("Quina decoracio vols comprar?");
-				EscribirTxt.escribirTxt("  "+nomDecoracio);
+				escribirTxt("  "+nomDecoracio);
 				Map<String, Floristeria> mapDecoracio = new HashMap<>();
 				mapDecoracio.put(nomDecoracio, floristeria);
 
@@ -519,14 +523,42 @@ public class Main {
 				.map(x -> x.getPreuTotalLlistaComprat()).mapToDouble(x -> x).sum();
 		System.out.println("El total d'aquesta floristeria es :" + montoCompresAntigues);
 
-		/*
-		 * 
-		 * //total del venut a totes les floristeries, que m'he confos i ja que l'he fet
-		 * //el borrare mes tard per si un cas sigués necessari Double totalDeTot =
-		 * floristerias.stream().map(x -> compresAntigues(Optional.of(x))).mapToDouble(s
-		 * -> s).sum(); System.out.println("El total de totes les floristeries és de :"
-		 * + totalDeTot);
-		 * 
-		 */
 	}
+
+	public static void escribirEnFloristeriaTXT(ArrayList<Floristeria> floristeria){
+		int i = 0;
+		do {
+			escribirFloristeriaTxt("Els productes de la floristeria " + floristerias.get(i).getNom() + ": ");
+
+			floristerias.forEach(x -> {
+				x.getConjuntArbres().stream().forEach(arbre -> {
+					escribirFloristeriaTxt("Arbre: ");
+					escribirFloristeriaTxt(arbre.getNom());
+					escribirFloristeriaTxt(arbre.getAlcada().toString());
+					escribirFloristeriaTxt(arbre.getPreuPerUnitat().toString());
+					escribirFloristeriaTxt(Integer.toString(arbre.getStock()));
+				});
+
+				x.getConjuntFlors().stream().forEach(flor -> {
+					escribirFloristeriaTxt("Flor");
+					escribirFloristeriaTxt(flor.getNom());
+					escribirFloristeriaTxt(flor.getColor());
+					escribirFloristeriaTxt(flor.getPreuPerUnitat().toString());
+					escribirFloristeriaTxt(Integer.toString(flor.getStock()));
+				});
+
+				x.getConjuntDecoracio().stream().forEach(decoracio -> {
+					escribirFloristeriaTxt("Decoracio");
+					escribirFloristeriaTxt(decoracio.getNom());
+					escribirFloristeriaTxt(decoracio.getMaterial().toString());
+					escribirFloristeriaTxt(decoracio.getPreuPerUnitat().toString());
+					escribirFloristeriaTxt(Integer.toString(decoracio.getStock()));
+				});
+			});
+
+			i++;
+		}while(i < floristerias.size());
+	}
+
+
 }

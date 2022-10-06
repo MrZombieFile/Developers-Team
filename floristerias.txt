@@ -1,0 +1,29 @@
+  Floristeria creada:
+    hola
+  Afegint arbre a hola
+    Nom: pino
+    alcada: 2.0
+    preu: 2.0
+    stock: 2
+  Afegint decoracio a hola
+    material: Plàstic
+    nom: puerta
+    preu: 2.0
+    stock: 2
+  Floristeria creada:
+    adios
+  Afegint flor a adios
+    nomrosa
+    color2
+    preu2.0
+    stock2
+  Afegint arbre a hola
+    Nom: aveto
+    alcada: 2.0
+    preu: 2.0
+    stock: 2
+  Creant ticket a floristeria : hola
+  Comprant arbre :
+  pino
+  Comprant decoració:
+  h

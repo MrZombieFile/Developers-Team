@@ -306,9 +306,9 @@ public class Main {
 		if (floristeria == null) {
 			System.out.println("La floristeria no existe");
 		} else {
-			System.out.println("Stock de la floristeria: ");
-			System.out.println("Arbres> \n " + floristeria.getConjuntArbres().size() + "Flors \n "
-					+ floristeria.getConjuntFlors().size() + "Decoració \n "
+			System.out.println("Stock de la floristeria: \n ");
+			System.out.println("Arbres>  " + floristeria.getConjuntArbres().size() + " \n Flors "
+					+ floristeria.getConjuntFlors().size() + "\n Decoració  "
 					+ floristeria.getConjuntDecoracio().size());
 		}
 		System.out.println("-----------------------------------------------------");

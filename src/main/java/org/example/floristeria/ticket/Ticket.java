@@ -1,9 +1,9 @@
 package org.example.floristeria.ticket;
 
 
-import org.example.floristeria.stock.producte.Producte;
-
 import java.util.ArrayList;
+
+import org.example.floristeria.stock.Producte;
 
 public class Ticket {
 

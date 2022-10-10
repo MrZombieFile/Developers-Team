@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.floristeria.stock.producte.Producte;
 import org.example.floristeria.ticket.Ticket;
 import org.example.utilities.*;
 
@@ -94,50 +93,7 @@ public class Main {
 				+ " 13, Visualitzar el total de diners guanyats amb totes les vendes \n"
 				+ " -------------------------------------------------------------------------------------------------");
 	}
-//optimizarlo
-	private static Producte buscarProducto(String nom, Floristeria floristeria) {
-		boolean encontrado = false;
-		int i = 0;
-		Producte producto = null;
-		while (i < floristeria.getConjuntArbres().size() && encontrado == false) {
 
-			if (floristeria.getConjuntArbres().get(i).getNom().equalsIgnoreCase(nom)) {
-				encontrado = true;
-				producto = floristeria.getConjuntArbres().get(i);
-
-			}
-			i++;
-
-		}
-		if (encontrado == false) {
-			i = 0;
-			while (encontrado == false && i < floristeria.getConjuntFlors().size()) {
-
-				if (floristeria.getConjuntFlors().get(i).getNom().equalsIgnoreCase(nom)) {
-					encontrado = true;
-					producto = floristeria.getConjuntArbres().get(i);
-				}
-				i++;
-
-			}
-		}
-		if (encontrado == false) {
-			i = 0;
-			while (encontrado == false && i < floristeria.getConjuntDecoracio().size()) {
-				if (floristeria.getConjuntDecoracio().get(i).getNom().equalsIgnoreCase(nom)) {
-					encontrado = true;
-					producto = floristeria.getConjuntArbres().get(i);
-
-				}
-				i++;
-
-			}
-		}
-
-		if (encontrado == false)
-			i = 0;
-		return producto;
-	}
 
 	private static Floristeria buscarFloristeria() {
 		String nom = Entrada.leerString("Indiqui el nom de la floristeria");
@@ -157,70 +113,50 @@ public class Main {
 	}
 
 	public static void crearFloristeria() {
-		int i = 0;
-		boolean condicion = false;
 		String salidaPantalla = "";
+		Floristeria floristeria1 = buscarFloristeria();
 
-		String nombre = Entrada.leerString("Indica un nom per a la floristeria :");
+		if (floristeria1 == null) {
 
-		while (i < floristerias.size() && condicion == false) {
-			if (nombre.equalsIgnoreCase(floristerias.get(i).getNom())) {
-				salidaPantalla = "La floristeria ya existeix.";
-				condicion = true;
-			}
-			i++;
+			Floristeria floristeria = new Floristeria(
+					Entrada.leerString("Vuelva a introducir el nombre de la floristeria"));
+
+			floristerias.add(floristeria);
+			escribirTxt("  Floristeria creada:" + "\n     " + floristeria.getNom());
+
+			salidaPantalla = "Floristeria creada correctament.";
+		} else {
+			salidaPantalla = "La floristeria ya existeix.";
 		}
-			if (condicion == false) {
-				
-				Floristeria floristeria = new Floristeria(nombre);
 
-				floristerias.add(floristeria);
-				escribirTxt("  Floristeria creada:");
-				escribirTxt("    " + floristeria.getNom());
-
-				salidaPantalla = "Floristeria creada correctament.";
-			}
-		
 		System.out.println(salidaPantalla);
 	}
 
 	public static void afegirArbre() {
 
-		int i = 0;
-		boolean condicion = false;
 		String salidaPantalla = "";
 
-		String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir l'arbre :");
+		Floristeria floristeria = buscarFloristeria();
 
-		while (i < floristerias.size() && !condicion) {
+		if (floristeria != null) {
 
-			if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
-				escribirTxt("  Afegint arbre a " + nomFloristeria);
+			String nom = Entrada.leerString("Indica el nom de l'arbre :");
 
-				String nom = Entrada.leerString("Indica el nom de l'arbre :");
-				escribirTxt("    Nom: " + nom);
+			float alcada = Entrada.leerFloat("Indica l'alçada de l'abre :");
 
-				float alcada = Entrada.leerFloat("Indica l'alçada de l'abre :");
-				escribirTxt("    alcada: " + alcada);
+			float preu = Entrada.leerFloat("Indica el preu de l'arbre :");
 
-				float preu = Entrada.leerFloat("Indica el preu de l'arbre :");
-				escribirTxt("    preu: " + preu);
+			int stock = Entrada.leerInt("Indica stock :");
 
-				int stock = Entrada.leerInt("Indica stock :");
-				escribirTxt("    stock: " + stock);
+			Arbre arbre = new Arbre(nom, alcada, preu, stock);
 
-				Arbre arbre = new Arbre(nom, alcada, preu, stock);
+			floristeria.getConjuntArbres().add(arbre);
 
-				floristerias.get(i).getConjuntArbres().add(arbre);
+			salidaPantalla = "Arbre afegit correctament.";
+			escribirTxt(" Afegint arbre a " + floristeria.getNom() + "\n     Nom: " + nom + "\n     alcada: " + alcada
+					+ "\n     preu: " + preu + "\n     stock: " + stock);
 
-				salidaPantalla = "Arbre afegit correctament.";
-
-				condicion = true;
-
-			}
-			i++;
-		}
-		if (condicion == false) {
+		} else {
 			salidaPantalla = "La floristeria no existeix.";
 		}
 		System.out.println(salidaPantalla);
@@ -228,40 +164,27 @@ public class Main {
 
 	public static void afegirFlor() {
 
-		int i = 0;
-		boolean condicion = false;
 		String salidaPantalla = "";
+		Floristeria floristeria = buscarFloristeria();
 
-		String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir la flor :");
+		if (floristeria != null) {
 
-		while (i < floristerias.size() && condicion == false) {
+			String nom = Entrada.leerString("Indica el nom de la flor :");
+			String color = Entrada.leerString("Indica el color de la flor :");
 
-			if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
-				escribirTxt("  Afegint flor a " + nomFloristeria);
+			float preu = Entrada.leerFloat("Indica el preu de la flor :");
 
-				String nom = Entrada.leerString("Indica el nom de la flor :");
-				escribirTxt("    nom" + nom);
-				String color = Entrada.leerString("Indica el color de la flor :");
-				escribirTxt("    color" + color);
+			int stock = Entrada.leerInt("Indica stock :");
 
-				float preu = Entrada.leerFloat("Indica el preu de la flor :");
-				escribirTxt("    preu" + preu);
+			Flor flor = new Flor(nom, color, preu, stock);
 
-				int stock = Entrada.leerInt("Indica stock :");
-				escribirTxt("    stock" + stock);
+			floristeria.getConjuntFlors().add(flor);
 
-				Flor flor = new Flor(nom, color, preu, stock);
+			salidaPantalla = "Flor afegida correctament.";
+			escribirTxt("\n    Afegint flor a " + floristeria.getNom() + "\n    nom" + nom + "\n    color" + color
+					+ "\n    preu" + preu + "\n    stock" + stock);
 
-				floristerias.get(i).getConjuntFlors().add(flor);
-
-				salidaPantalla = "Flor afegida correctament.";
-
-				condicion = true;
-
-			}
-			i++;
-		}
-		if (condicion == false) {
+		} else {
 			salidaPantalla = "La floristeria no existeix";
 		}
 		System.out.println(salidaPantalla);
@@ -269,55 +192,42 @@ public class Main {
 
 	public static void afegirDecoracio() {
 
-		int i = 0;
-		boolean condicion = false;
 		int opcion;
 		Material material = null;
 		String salidaPantalla = "";
 
-		String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir la decoració :");
+		Floristeria floristeria = buscarFloristeria();
 
-		while (i < floristerias.size() && condicion == false) {
-			if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
-				escribirTxt("  Afegint decoracio a " + nomFloristeria);
+		if (floristeria != null) {
 
-				do {
+			do {
 
-					opcion = Entrada.leerInt("Inidica el material de la decoració : " + "1.Fusta\n" + "2.Plàstic :");
+				opcion = Entrada.leerInt("Inidica el material de la decoració : " + "1.Fusta\n" + "2.Plàstic :");
 
-					if (opcion == 1) {
-						material = Material.Fusta;
-						escribirTxt("    material: " + material.toString());
+				if (opcion == 1) {
+					material = Material.Fusta;
 
-					} else if (opcion == 2) {
-						material = Material.Plàstic;
-						escribirTxt("    material: " + material.toString());
+				} else if (opcion == 2) {
+					material = Material.Plàstic;
 
-					} else {
-						System.out.println("Opció incorrecta.");
-					}
-				} while (opcion != 1 && opcion != 2);
+				} else {
+					System.out.println("Opció incorrecta.");
+				}
+			} while (opcion != 1 && opcion != 2);
 
-				String nom = Entrada.leerString("Indica el nom de la decoració :");
-				escribirTxt("    nom: " + nom);
+			String nom = Entrada.leerString("Indica el nom de la decoració :");
+			float preu = Entrada.leerFloat("Indica el preu del material :");
 
-				float preu = Entrada.leerFloat("Indica el preu del material :");
-				escribirTxt("    preu: " + preu);
+			int stock = Entrada.leerInt("Indica stock :");
+			escribirTxt("  Afegint decoracio a " + floristeria.getNom() + "\n     nom: " + nom + "\n     material: "
+					+ material.toString() + "\n     preu: " + preu + "\n     stock: " + stock);
 
-				int stock = Entrada.leerInt("Indica stock :");
-				escribirTxt("    stock: " + stock);
+			Decoracio decoracio = new Decoracio(nom, material, preu, stock);
 
-				Decoracio decoracio = new Decoracio(nom, material, preu, stock);
+			floristeria.getConjuntDecoracio().add(decoracio);
 
-				floristerias.get(i).getConjuntDecoracio().add(decoracio);
-
-				salidaPantalla = "Decoració afegida correctament.";
-
-				condicion = true;
-			}
-			i++;
-		}
-		if (condicion == false) {
+			salidaPantalla = "Decoració afegida correctament.";
+		} else {
 			salidaPantalla = "La floristeria no existeix";
 		}
 		System.out.println(salidaPantalla);
@@ -343,13 +253,12 @@ public class Main {
 
 		if (floristeria != null) {
 			String nom = Entrada.leerString("Indica el nom de l'arbre");
-			Producte producto = buscarProducto(nom, floristeria);
+			Arbre producto = Buscar.buscarA(nom, floristeria);
 
 			if (producto == null) {
 				System.out.println("No tens aquest arbre");
 			} else {
-				escribirTxt("  Retirant arbre a floristeria " + floristeria.getNom());
-				escribirTxt("    Nom arbre : " + nom);
+				escribirTxt("  Retirat arbre a floristeria " + floristeria.getNom() + "\n    Nom arbre : " + nom);
 				producto.eliminado();
 				floristeria.getConjuntArbres().remove(producto);
 			}
@@ -365,13 +274,12 @@ public class Main {
 
 		if (floristeria != null) {
 			String nom = Entrada.leerString("Indica el nom del arbre");
-			Producte producto = buscarProducto(nom, floristeria);
+			Flor producto = Buscar.buscarFlor(nom, floristeria);
 
 			if (producto == null) {
 				System.out.println("No tens aquesta flor");
 			} else {
-				escribirTxt("  Retirant flor a floristeria " + floristeria.getNom());
-				escribirTxt("    Nom flor : " + nom);
+				escribirTxt("  Retirat flor a floristeria " + floristeria.getNom() + "\n    Nom flor : " + nom);
 				producto.eliminado();
 				floristeria.getConjuntFlors().remove(producto);
 			}
@@ -387,13 +295,13 @@ public class Main {
 		if (floristeria != null) {
 
 			String nom = Entrada.leerString("Indica el nom del arbre");
-			Producte producto = buscarProducto(nom, floristeria);
+			Decoracio producto = Buscar.buscarD(nom, floristeria);
 
 			if (producto == null) {
 				System.out.println("No tens aquesta Decoracio");
 			} else {
-				escribirTxt("  Retirant decoració a floristeria " + floristeria.getNom());
-				escribirTxt("    Nom decoració : " + nom);
+				escribirTxt(
+						"  Retirant decoració a floristeria " + floristeria.getNom() + "\n    Nom decoració : " + nom);
 				producto.eliminado();
 				floristeria.getConjuntDecoracio().remove(producto);
 			}
@@ -429,9 +337,9 @@ public class Main {
 		Floristeria floristeria = buscarFloristeria();
 
 		Ticket ticket = null;
-		if (floristeria == null){
+		if (floristeria == null) {
 			System.out.println("La floristeria no existeix");
-		}else {
+		} else {
 			int i;
 			ticket = new Ticket();
 			escribirTxt("  Creant ticket a floristeria : " + floristeria.getNom());
@@ -440,19 +348,19 @@ public class Main {
 						"Què vols comprar?" + "\n 1, Arbres \n 2, Flors \n 3, Decoració \n 4, Ja ho he comprat tot");
 
 				switch (i) {
-					case 1:
-						floristeria.getConjuntArbres().forEach(x -> System.out.println(x.getNom()));
-						crearTicketArbre(floristeria, ticket);
-						break;
-					case 2:
-						floristeria.getConjuntFlors().forEach(x -> System.out.println(x.getNom()));
-						crearTicketFlor(floristeria, ticket);
-						break;
-					case 3:
-						floristeria.getConjuntDecoracio().forEach(x -> System.out.println(x.getNom()));
-						crearTicketDecoracio(floristeria, ticket);
-						break;
-					default:
+				case 1:
+					floristeria.getConjuntArbres().forEach(x -> System.out.println(x.getNom()));
+					crearTicketArbre(floristeria, ticket);
+					break;
+				case 2:
+					floristeria.getConjuntFlors().forEach(x -> System.out.println(x.getNom()));
+					crearTicketFlor(floristeria, ticket);
+					break;
+				case 3:
+					floristeria.getConjuntDecoracio().forEach(x -> System.out.println(x.getNom()));
+					crearTicketDecoracio(floristeria, ticket);
+					break;
+				default:
 
 				}
 			} while (i != 4);
@@ -462,33 +370,33 @@ public class Main {
 		}
 	}
 
-	public static void crearTicketArbre(Floristeria floristeria, Ticket ticket){
+	public static void crearTicketArbre(Floristeria floristeria, Ticket ticket) {
 		escribirTxt("  Comprant arbre :");
 		String nomArbre = Entrada.leerString("Quin arbre vols comprar?");
 		escribirTxt("  " + nomArbre);
 
-		Arbre arbreAComprar = (Arbre) buscarProducto(nomArbre, floristeria);
+		Arbre arbreAComprar = Buscar.buscarA(nomArbre, floristeria);
 
 		ticket.afegirALlistaComprat(arbreAComprar);
-		//afegir arbre, flor o dec. haventhi 3 arrylist rebre arbre i fer l'add
+		// afegir arbre, flor o dec. haventhi 3 arrylist rebre arbre i fer l'add
 	}
 
-	public static void crearTicketFlor(Floristeria floristeria, Ticket ticket){
+	public static void crearTicketFlor(Floristeria floristeria, Ticket ticket) {
 		escribirTxt("  Comprant flor:");
 		String nomFlor = Entrada.leerString("Quina flor vols comprar?");
 		escribirTxt("  " + nomFlor);
 
-		Flor florAComprar = (Flor) buscarProducto(nomFlor, floristeria);
+		Flor florAComprar = Buscar.buscarFlor(nomFlor, floristeria);
 
 		ticket.afegirALlistaComprat(florAComprar);
 	}
 
-	public static void crearTicketDecoracio(Floristeria floristeria, Ticket ticket){
+	public static void crearTicketDecoracio(Floristeria floristeria, Ticket ticket) {
 		escribirTxt("  Comprant decoració:");
 		String nomDecoracio = Entrada.leerString("Quina decoracio vols comprar?");
 		escribirTxt("  " + nomDecoracio);
 
-		Decoracio decoracio = (Decoracio) buscarProducto(nomDecoracio, floristeria);
+		Decoracio decoracio = Buscar.buscarD(nomDecoracio, floristeria);
 
 		ticket.afegirALlistaComprat(decoracio);
 	}

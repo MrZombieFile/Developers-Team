@@ -79,6 +79,10 @@ public class Floristeria {
         this.historicDeTickets = historicDeTickets;
     }
 
+    public void afegirTicket(Ticket ticket){
+        this.historicDeTickets.add(ticket);
+    }
+
     @Override
 	public String toString() {
 		return "Floristeria=" + nom 

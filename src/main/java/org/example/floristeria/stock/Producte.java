@@ -1,4 +1,4 @@
-package org.example.floristeria.stock.producte;
+package org.example.floristeria.stock;
 
 public abstract class Producte {
 	protected String nom;

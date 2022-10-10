@@ -1,7 +1,5 @@
 package org.example.floristeria.stock;
 
-import org.example.floristeria.stock.producte.Producte;
-
 public class Flor extends Producte {
 	
 

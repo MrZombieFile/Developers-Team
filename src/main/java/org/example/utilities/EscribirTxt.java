@@ -1,14 +1,11 @@
 package org.example.utilities;
 
-import org.example.floristeria.Floristeria;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 public class EscribirTxt {
 	private static FileWriter fichero = null;
-	private static PrintWriter pw = null;
 
 	public static void escribirTxt(String texto) {
 		FileWriter fichero = null;

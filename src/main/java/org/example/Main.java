@@ -96,7 +96,7 @@ public class Main {
 				+ " 13, Visualitzar el total de diners guanyats amb totes les vendes \n"
 				+ " -------------------------------------------------------------------------------------------------");
 	}
-
+//optimizarlo
 	private static Producte buscarProducto(String nom, Floristeria floristeria) {
 		boolean encontrado = false;
 		int i = 0;
@@ -178,7 +178,7 @@ public class Main {
 
 		String nomFloristeria = Entrada.leerString("Indica el nom de la floristeria on vols afegir l'arbre :");
 
-		while (i < floristerias.size() && condicion == false) {
+		while (i < floristerias.size() && !condicion) {
 
 			if (nomFloristeria.equalsIgnoreCase(floristerias.get(i).getNom())) {
 				escribirTxt("  Afegint arbre a "+ nomFloristeria);
@@ -405,91 +405,79 @@ public class Main {
 	public static Ticket crearTicket() {
 		Floristeria floristeria = buscarFloristeria();
 
-		int i;
-		Ticket ticket = new Ticket();
-		escribirTxt("  Creant ticket a floristeria : "+floristeria.getNom());
-		do {
-			i = Entrada.leerInt(
-					"Què vols comprar?" + "\n 1, Arbres \n 2, Flors \n 3, Decoració \n 4, Ja ho he comprat tot");
+        if (floristeria == null){
+            System.out.println("La floristeria no existeix");
+        }else {
+            int i;
+            Ticket ticket = new Ticket();
+            escribirTxt("  Creant ticket a floristeria : " + floristeria.getNom());
+            do {
+                i = Entrada.leerInt(
+                        "Què vols comprar?" + "\n 1, Arbres \n 2, Flors \n 3, Decoració \n 4, Ja ho he comprat tot");
 
-			switch (i) {
-			case 1:
-				floristeria.getConjuntArbres().forEach(x -> System.out.println(x.getNom()));
-				escribirTxt("  Comprant arbre :");
-				String nomArbre = Entrada.leerString("Quin arbre vols comprar?");
-				escribirTxt("  "+nomArbre);
-				Map<String, Floristeria> mapArbre = new HashMap<>();
-				mapArbre.put(nomArbre, floristeria);
+                switch (i) {
+                    case 1:
+                        floristeria.getConjuntArbres().forEach(x -> System.out.println(x.getNom()));
+                        crearTicketArbre(floristeria, ticket);
+                        break;
+                    case 2:
+                        floristeria.getConjuntFlors().forEach(x -> System.out.println(x.getNom()));
+                        crearTicketFlor(floristeria, ticket);
+                        break;
+                    case 3:
+                        floristeria.getConjuntDecoracio().forEach(x -> System.out.println(x.getNom()));
+                        escribirTxt("  Comprant decoració:");
+                        String nomDecoracio = Entrada.leerString("Quina decoracio vols comprar?");
+                        escribirTxt("  " + nomDecoracio);
+                        Map<String, Floristeria> mapDecoracio = new HashMap<>();
+                        mapDecoracio.put(nomDecoracio, floristeria);
 
-				//retirarFlor(); ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
+                        //retirarFlor(); ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
 
-				Arbre a = (Arbre) buscarProducto(nomArbre, floristeria);
+                        Decoracio e = (Decoracio) buscarProducto(nomDecoracio, floristeria);
 
-				// aqui l'enregistro al tiquet que haura de sortir per la caixa
-				ArrayList<Producte> producteArrayListArbre;
-				if (ticket.getLlistaComprat() == null) {
-					producteArrayListArbre = new ArrayList<Producte>();
-				} else {
-					producteArrayListArbre = ticket.getLlistaComprat();
-				}
 
-				producteArrayListArbre.add(a);
-				ticket.setLlistaComprat(producteArrayListArbre);
+                        // aqui l'enregistro al tiquet que haura de sortir per la caixa
+                        ArrayList<Producte> producteArrayListDecoracio;
+                        if (ticket.getLlistaComprat() == null) {
+                            producteArrayListDecoracio = new ArrayList<Producte>();
+                        } else {
+                            producteArrayListDecoracio = ticket.getLlistaComprat();
+                        }
 
-				break;
-			case 2:
-				floristeria.getConjuntFlors().forEach(x -> System.out.println(x.getNom()));
-				escribirTxt("  Comprant flor:");
-				String nomFlor = Entrada.leerString("Quina flor vols comprar?");
-				escribirTxt("  "+nomFlor);
-				Map<String, Floristeria> mapFlor = new HashMap<>();
-				mapFlor.put(nomFlor, floristeria);
-
-				//retirarFlor(); ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
-
-				Flor f = (Flor) buscarProducto(nomFlor, floristeria);
-
-				// aqui l'enregistro al tiquet que haura de sortir per la caixa
-				ArrayList<Producte> producteArrayListFlor;
-				if (ticket.getLlistaComprat() == null) {
-					producteArrayListFlor = new ArrayList<Producte>();
-				} else {
-					producteArrayListFlor = ticket.getLlistaComprat();
-				}
-
-				producteArrayListFlor.add(f);
-				ticket.setLlistaComprat(producteArrayListFlor);
-				break;
-			case 3:
-				floristeria.getConjuntDecoracio().forEach(x -> System.out.println(x.getNom()));
-				escribirTxt("  Comprant decoració:");
-				String nomDecoracio = Entrada.leerString("Quina decoracio vols comprar?");
-				escribirTxt("  "+nomDecoracio);
-				Map<String, Floristeria> mapDecoracio = new HashMap<>();
-				mapDecoracio.put(nomDecoracio, floristeria);
-
-				//retirarFlor(); ya no te sirve porque elimina toda Flor no una unica flor como me habíais dicho
-
-				Decoracio e = (Decoracio) buscarProducto(nomDecoracio, floristeria);
-				 
-
-				// aqui l'enregistro al tiquet que haura de sortir per la caixa
-				ArrayList<Producte> producteArrayListDecoracio;
-				if (ticket.getLlistaComprat() == null) {
-					producteArrayListDecoracio = new ArrayList<Producte>();
-				} else {
-					producteArrayListDecoracio = ticket.getLlistaComprat();
-				}
-
-				//producteArrayListDecoracio.add(e);
-				ticket.setLlistaComprat(producteArrayListDecoracio);
-				break;
-			}
-		} while (i != 4);
+                        //producteArrayListDecoracio.add(e);
+                        ticket.setLlistaComprat(producteArrayListDecoracio);
+                        break;
+                    default:
+                        //aquí falta rellenar
+                }
+            } while (i != 4);
+        }
 		ArrayList<Ticket> historicDeTickets = floristeria.getHistoricDeTickets();
-		historicDeTickets.add(ticket);
+		historicDeTickets.add(ticket);//fer el mateix que amb les altres, metode nou afegir ticket
 		floristeria.setHistoricDeTickets(historicDeTickets);
 		return ticket;
+	}
+
+    public static void crearTicketArbre(Floristeria floristeria, Ticket ticket){
+        escribirTxt("  Comprant arbre :");
+        String nomArbre = Entrada.leerString("Quin arbre vols comprar?");
+        escribirTxt("  " + nomArbre);
+
+        Arbre arbreAComprar = (Arbre) buscarProducto(nomArbre, floristeria);
+
+        ticket.afegirALlistaComprat(arbreAComprar);
+        //afegir arbre, flor o dec. haventhi 3 arrylist rebre arbre i fer l'add
+    }
+
+	public static void crearTicketFlor(Floristeria floristeria, Ticket ticket){
+		escribirTxt("  Comprant flor:");
+		String nomFlor = Entrada.leerString("Quina flor vols comprar?");
+		escribirTxt("  " + nomFlor);
+
+		Flor florAComprar = (Flor) buscarProducto(nomFlor, floristeria);
+
+		ticket.afegirALlistaComprat(florAComprar);
 	}
 
 	public static void compresAntigues(Optional<Floristeria> optional) {

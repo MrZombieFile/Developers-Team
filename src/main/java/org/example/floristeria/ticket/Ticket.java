@@ -13,6 +13,9 @@ public class Ticket {
         return llistaComprat;
     }
 
+    public void afegirALlistaComprat(Producte producte){
+        this.llistaComprat.add(producte);
+    }
     public void setLlistaComprat(ArrayList<Producte> llistaComprat) {
         this.llistaComprat = llistaComprat;
     }

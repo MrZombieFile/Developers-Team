@@ -36,6 +36,6 @@ public abstract class Producte {
   	
     public abstract void eliminado();
 
-    public abstract String toString();
+    public abstract String imprimir();
 
 }

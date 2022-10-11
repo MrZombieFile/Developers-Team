@@ -23,7 +23,7 @@ public class Decoracio extends Producte {
 	}
 
     @Override
-    public String toString() {
+    public String imprimir() {
         return "Nom de la decoracio: " + super.getNom()
                 + "material: " + this.material.toString()
                 + "preu per unitat: " + super.getPreuPerUnitat().toString()

@@ -368,15 +368,15 @@ public class Main {
 					floristeria.getConjuntDecoracio().forEach(x -> System.out.println(x.getNom()));
 					crearTicketDecoracio(floristeria, ticket);
 					break;
+				case 4:
+					break;
 				default:
                     System.out.println("Introdueix una opció vàlida");
                     break;
 				}
 			} while (i != 4);
 
-			escribirTxt("El ticket conté " + ticket.toString());
 			floristeria.afegirTicket(ticket);
-
 		}
 	}
 
@@ -387,8 +387,7 @@ public class Main {
 
 		Arbre arbreAComprar = Buscar.buscarA(nomArbre, floristeria);
 
-		ticket.afegirALlistaComprat(arbreAComprar);
-		// afegir arbre, flor o dec. haventhi 3 arrylist rebre arbre i fer l'add
+		ticket.afegirArbreComprat(arbreAComprar);
 	}
 
 	public static void crearTicketFlor(Floristeria floristeria, Ticket ticket) {
@@ -398,7 +397,7 @@ public class Main {
 
 		Flor florAComprar = Buscar.buscarFlor(nomFlor, floristeria);
 
-		ticket.afegirALlistaComprat(florAComprar);
+		ticket.afegirFlorComprada(florAComprar);
 	}
 
 	public static void crearTicketDecoracio(Floristeria floristeria, Ticket ticket) {
@@ -408,7 +407,7 @@ public class Main {
 
 		Decoracio decoracio = Buscar.buscarD(nomDecoracio, floristeria);
 
-		ticket.afegirALlistaComprat(decoracio);
+		ticket.afegirDecoracioComprada(decoracio);
 	}
 
 	public static void compresAntigues(Optional<Floristeria> optional) {

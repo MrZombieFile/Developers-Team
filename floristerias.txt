@@ -1,8 +1,0 @@
-  Floristeria creada:
-    f1
- Afegint arbre a f1
-     Nom: a1
-     alcada: 12.0
-     preu: 12.0
-     stock: 12
-  Creant ticket a floristeria : f1

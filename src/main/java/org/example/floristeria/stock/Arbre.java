@@ -18,7 +18,7 @@ public class Arbre extends Producte {
 	}
 
     @Override
-    public String toString() {
+    public String imprimir() {
         return "Nom de l'arbre: " + super.getNom()
                 + "alçada: " + this.alcada.toString()
                 + "preu per unitat: " + super.getPreuPerUnitat().toString()

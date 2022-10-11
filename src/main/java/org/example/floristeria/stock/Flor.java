@@ -20,7 +20,7 @@ public class Flor extends Producte {
 	}
 
     @Override
-    public String toString() {
+    public String imprimir() {
         return "Nom de la flor: " + super.getNom()
                 + "color: " + this.color
                 + "preu per unitat: " + super.getPreuPerUnitat().toString()

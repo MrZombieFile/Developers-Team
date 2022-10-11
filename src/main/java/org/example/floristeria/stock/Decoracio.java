@@ -21,5 +21,12 @@ public class Decoracio extends Producte {
 	public void eliminado() {
 		System.out.println("El "+ nom+ " ha sigut eliminat");
 	}
-    
+
+    @Override
+    public String toString() {
+        return "Nom de la decoracio: " + super.getNom()
+                + "material: " + this.material.toString()
+                + "preu per unitat: " + super.getPreuPerUnitat().toString()
+                + "stock: " + Integer.toString(super.getStock());
+    }
 }

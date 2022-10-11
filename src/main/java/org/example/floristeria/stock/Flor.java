@@ -18,4 +18,12 @@ public class Flor extends Producte {
 	public void eliminado() {
 		System.out.println("El "+ nom+ " ha sigut eliminat");
 	}
+
+    @Override
+    public String toString() {
+        return "Nom de la flor: " + super.getNom()
+                + "color: " + this.color
+                + "preu per unitat: " + super.getPreuPerUnitat().toString()
+                + "stock: " + Integer.toString(super.getStock());
+    }
 }

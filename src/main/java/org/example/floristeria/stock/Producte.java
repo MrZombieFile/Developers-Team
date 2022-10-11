@@ -2,7 +2,7 @@ package org.example.floristeria.stock;
 
 public abstract class Producte {
 	protected String nom;
-	private Float preuPerUnitat;
+	protected Float preuPerUnitat;
     protected int stock;
 
     public Producte(String nom, Float preu, int stock) {
@@ -34,5 +34,8 @@ public abstract class Producte {
   		this.nom = nom;
   	}
   	
-public abstract void eliminado();
+    public abstract void eliminado();
+
+    public abstract String toString();
+
 }

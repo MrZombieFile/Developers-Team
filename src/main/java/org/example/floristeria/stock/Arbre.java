@@ -17,4 +17,11 @@ public class Arbre extends Producte {
 		System.out.println("El "+ nom+ " ha sigut eliminat");
 	}
 
+    @Override
+    public String toString() {
+        return "Nom de l'arbre: " + super.getNom()
+                + "alçada: " + this.alcada.toString()
+                + "preu per unitat: " + super.getPreuPerUnitat().toString()
+                + "stock: " + Integer.toString(super.getStock());
+    }
 }

@@ -112,25 +112,33 @@ public class Main {
 		return floristeria;
 	}
 
-	public static void crearFloristeria() {
-		String salidaPantalla = "";
-		Floristeria floristeria1 = buscarFloristeria();
+    public static void crearFloristeria() {
+        int i = 0;
+        boolean condicion = false;
+        String salidaPantalla = "";
 
-		if (floristeria1 == null) {
+        String nombre = Entrada.leerString("Indica un nom per a la floristeria :");
 
-			Floristeria floristeria = new Floristeria(
-					Entrada.leerString("Vuelva a introducir el nombre de la floristeria"));
+        while (i < floristerias.size() && condicion == false) {
+            if (nombre.equalsIgnoreCase(floristerias.get(i).getNom())) {
+                salidaPantalla = "La floristeria ya existeix.";
+                condicion = true;
+            }
+            i++;
+        }
+        if (condicion == false) {
 
-			floristerias.add(floristeria);
-			escribirTxt("  Floristeria creada:" + "\n     " + floristeria.getNom());
+            Floristeria floristeria = new Floristeria(nombre);
 
-			salidaPantalla = "Floristeria creada correctament.";
-		} else {
-			salidaPantalla = "La floristeria ya existeix.";
-		}
+            floristerias.add(floristeria);
+            escribirTxt("  Floristeria creada:");
+            escribirTxt("    " + floristeria.getNom());
 
-		System.out.println(salidaPantalla);
-	}
+            salidaPantalla = "Floristeria creada correctament.";
+        }
+
+        System.out.println(salidaPantalla);
+    }
 
 	public static void afegirArbre() {
 
@@ -361,19 +369,21 @@ public class Main {
 					crearTicketDecoracio(floristeria, ticket);
 					break;
 				default:
-
+                    System.out.println("Introdueix una opció vàlida");
+                    break;
 				}
 			} while (i != 4);
 
+			escribirTxt("El ticket conté " + ticket.toString());
 			floristeria.afegirTicket(ticket);
 
 		}
 	}
 
 	public static void crearTicketArbre(Floristeria floristeria, Ticket ticket) {
-		escribirTxt("  Comprant arbre :");
+			//escribirTxt("  Comprant arbre :");
 		String nomArbre = Entrada.leerString("Quin arbre vols comprar?");
-		escribirTxt("  " + nomArbre);
+			//escribirTxt("  " + nomArbre);
 
 		Arbre arbreAComprar = Buscar.buscarA(nomArbre, floristeria);
 

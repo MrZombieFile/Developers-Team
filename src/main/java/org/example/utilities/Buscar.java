@@ -27,7 +27,7 @@ public class Buscar {
 		boolean encontrado = false;
 		int i = 0;
 		Arbre producto = null;
-		while (encontrado == false && i < floristeria.getConjuntFlors().size()) {
+		while (encontrado == false && i < floristeria.getConjuntArbres().size()) {
 
 			if (floristeria.getConjuntArbres().get(i).getNom().equalsIgnoreCase(nom)) {
 				encontrado = true;
@@ -42,7 +42,7 @@ public class Buscar {
 		boolean encontrado = false;
 		int i = 0;
 		Decoracio producto = null;
-		while (encontrado == false && i < floristeria.getConjuntFlors().size()) {
+		while (encontrado == false && i < floristeria.getConjuntDecoracio().size()) {
 
 			if (floristeria.getConjuntDecoracio().get(i).getNom().equalsIgnoreCase(nom)) {
 				encontrado = true;

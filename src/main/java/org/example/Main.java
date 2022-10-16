@@ -4,6 +4,7 @@ import org.example.floristeria.ticket.Ticket;
 import org.example.utilities.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.example.floristeria.Floristeria;
 import org.example.floristeria.stock.Arbre;
@@ -350,7 +351,6 @@ public class Main {
 		} else {
 			int i;
 			ticket = new Ticket();
-			escribirTxt("  Creant ticket a floristeria : " + floristeria.getNom());
 			do {
 				i = Entrada.leerInt(
 						"Què vols comprar?" + "\n 1, Arbres \n 2, Flors \n 3, Decoració \n 4, Ja ho he comprat tot");
@@ -369,6 +369,10 @@ public class Main {
 					crearTicketDecoracio(floristeria, ticket);
 					break;
 				case 4:
+					//#####################################################################
+					floristeria.afegirTicket(ticket);
+					escribirTxt("  Creant ticket a floristeria : " + floristeria.getNom() +
+							"L\'usuari ha comprat: " + floristeria.getLastTicket().imprimir());
 					break;
 				default:
                     System.out.println("Introdueix una opció vàlida");
@@ -376,35 +380,28 @@ public class Main {
 				}
 			} while (i != 4);
 
-			floristeria.afegirTicket(ticket);
+
+
+
 		}
 	}
 
 	public static void crearTicketArbre(Floristeria floristeria, Ticket ticket) {
-			//escribirTxt("  Comprant arbre :");
 		String nomArbre = Entrada.leerString("Quin arbre vols comprar?");
-			//escribirTxt("  " + nomArbre);
-
 		Arbre arbreAComprar = Buscar.buscarA(nomArbre, floristeria);
-
+		System.out.println(arbreAComprar.getNom() + arbreAComprar.getAlcada());
 		ticket.afegirArbreComprat(arbreAComprar);
 	}
 
 	public static void crearTicketFlor(Floristeria floristeria, Ticket ticket) {
-		escribirTxt("  Comprant flor:");
 		String nomFlor = Entrada.leerString("Quina flor vols comprar?");
-		escribirTxt("  " + nomFlor);
-
 		Flor florAComprar = Buscar.buscarFlor(nomFlor, floristeria);
 
 		ticket.afegirFlorComprada(florAComprar);
 	}
 
 	public static void crearTicketDecoracio(Floristeria floristeria, Ticket ticket) {
-		escribirTxt("  Comprant decoració:");
 		String nomDecoracio = Entrada.leerString("Quina decoracio vols comprar?");
-		escribirTxt("  " + nomDecoracio);
-
 		Decoracio decoracio = Buscar.buscarD(nomDecoracio, floristeria);
 
 		ticket.afegirDecoracioComprada(decoracio);

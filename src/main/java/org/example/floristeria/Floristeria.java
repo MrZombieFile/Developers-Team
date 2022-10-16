@@ -75,6 +75,10 @@ public class Floristeria {
         return historicDeTickets;
     }
 
+    public Ticket getLastTicket(){
+        return historicDeTickets.get(historicDeTickets.size() - 1);
+    }
+
     public void setHistoricDeTickets(ArrayList<Ticket> historicDeTickets) {
         this.historicDeTickets = historicDeTickets;
     }
@@ -91,6 +95,6 @@ public class Floristeria {
 				+ ", conjuntDecoracio=" + conjuntDecoracio.toString() 
 				+ " \n -------------------------------------------------------------------";
 	}
-    
+
    	
 }

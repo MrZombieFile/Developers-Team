@@ -1,0 +1,89 @@
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Creant ticket a floristeria : f1L'usuari ha comprat: []
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Creant ticket a floristeria : f1L'usuari ha comprat: []
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+ Afegint arbre a f1
+     Nom: a2
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Creant ticket a floristeria : f1L'usuari ha comprat: 
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Creant ticket a floristeria : f1L'usuari ha comprat: {}
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Creant ticket a floristeria : f1L'usuari ha comprat: {}
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Creant ticket a floristeria : f1L'usuari ha comprat: {}
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Floristeria creada:
+    f1
+ Afegint arbre a f1
+     Nom: a1
+     alcada: 12.0
+     preu: 12.0
+     stock: 12
+  Creant ticket a floristeria : f1L'usuari ha comprat: {Nom de l'arbre: a1alçada: 12.0preu per unitat: 12.0stock: 12a1 a un preu de 12.0}
